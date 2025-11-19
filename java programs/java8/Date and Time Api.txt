@@ -1,0 +1,96 @@
+1. Get Current Date
+
+import java.time.LocalDate;
+
+public class DateExample {
+    public static void main(String[] args) {
+        LocalDate today = LocalDate.now();
+        System.out.println("Today: " + today);
+    }
+}
+
+Note:
+
+LocalDate.now() returns the current date based on the system clock.
+This value is stored in the variable today
+
+output:
+2025-07-29
+
+
+2. Get Current Time
+
+import java.time.LocalTime;
+
+public class TimeExample {
+    public static void main(String[] args) {
+        LocalTime now = LocalTime.now();
+        System.out.println("Current Time: " + now);
+    }
+}
+
+Output:
+Current Time: 10:37:52.370891400
+
+
+3. Get Current Date & Time
+
+import java.time.LocalDateTime;
+
+public class DateTimeExample {
+    public static void main(String[] args) {
+        LocalDateTime current = LocalDateTime.now();
+        System.out.println("Current Date & Time: " + current);
+    }
+}
+
+Output:
+Current Date & Time: 2025-07-29T10:44:12.923487900
+
+4. Format Date
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class FormatExample {
+    public static void main(String[] args) {
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        System.out.println("Formatted Date: " + date.format(formatter));
+    }
+}
+
+Note:
+DateTimeFormatter.ofPattern("dd-MM-yyyy") → defines the format.
+dd = day
+MM = month
+yyyy = year
+
+date.format(formatter) → applies the format to the date object.
+
+output:
+Formatted Date: 29-07-2025
+
+
+5. Calculate Period Between Two Dates
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class PeriodExample {
+    public static void main(String[] args) {
+        LocalDate dob = LocalDate.of(1997, 5, 10);
+        LocalDate today = LocalDate.now();
+        Period age = Period.between(dob, today);
+        System.out.println("Age: " + age.getYears() + " years");
+    }
+}
+
+Note:
+LocalDate.of(1997, 5, 10) → fixed birthdate
+LocalDate.now() → fetches today's date.
+Period.between(start, end) → calculates difference as a Period object.
+age.getYears() → gets only the year part of the difference.
+
+ Output:
+ Age: 28 years

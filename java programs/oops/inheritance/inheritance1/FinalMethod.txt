@@ -1,0 +1,9 @@
+class Animal {
+  final void sound() {
+    System.out.println("Animal sound");
+  }
+}
+
+class Dog extends Animal {
+  // void sound() {}  ❌ Not allowed – can't override final method
+} 

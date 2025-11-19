@@ -1,0 +1,172 @@
+//abstract demo
+
+abstract class Shape {
+  abstract void draw();
+}
+
+class Circle extends Shape {
+  void draw() {
+    System.out.println("Drawing circle...");
+  }
+}
+
+class Rectangle extends Shape {
+  void draw() {
+    System.out.println("Drawing rectangle");
+  }
+}
+
+public class AbstractDemo {
+  public static void main(String[] args) {
+    shape s1 = new Circle();
+    shape s2 = new Rectangle();
+
+    s1.draw();
+    s2.draw();
+ }
+}
+
+
+//2. Abstract Class with Constructor & Method
+
+abstract class Vehicle {
+  Vehicle() {
+    System.out.println("Vehicle created");
+  }
+
+  abstract void start();
+
+  void fuel() {
+    System.out.println("Fuels with petrol and diesel");
+  }
+}
+
+
+class Car extends Vehicle {
+   void start() {
+     System.out.println("Car started with key");
+  }
+}
+
+public class VehicleDemo {
+  public static void main(String[] args) {
+   Vehicle v = new Car();
+   v.start();
+   v.fuel();
+}
+}
+
+
+//interface
+
+interface Animal {
+  void sound();  //abstract method
+}
+
+class Dog implements Animal {
+  public void sound() {
+    System.out.println("Dog barks");
+ }
+}
+
+public class InterfaceDemo {
+  public static void main(String[] args) {
+    Animal a = new Dog();
+    a.sound();
+}
+}
+
+//Interface with Constants and Default Methods (Java 8+)
+
+interface Vehicle {
+   int MAX_SPEED = 120;
+    
+   void start();  //abstract
+
+   default void fuelType() {
+     System.out.println("Fuel: Petrol");
+  }
+}
+
+class Bike implements Vehicle {
+  public void start() {
+    System.out.println("Bike started");
+  }
+}
+
+public class InterfaceWithDefault {
+  public static void main(String[] args) {
+    Bike b = new Bike();
+    b.start();
+    b.fuelType();
+    System.out.println("Max speed " + Vehicle.MAX_SPEED);
+  }
+}
+
+//Multiple interface demo
+
+interface Printable {
+   void print();
+}
+
+interface Showable {
+  void show();
+}
+
+class Report implements Printable,Showable {
+  public void print() {
+    System.out.println("Report printed");
+  }
+
+  public void show() {
+   System.out.println("Report displayed");
+  }
+}
+
+
+
+public class MultipleInheritanceDemo {
+  public static void main(String[] args) {
+    Report r = new Report();
+    r.print();
+    r.show();
+  }
+}
+
+
+//diamond problem
+
+interface A {
+    void show();
+}
+
+interface B {
+    void show();
+}
+
+class C implements A, B {
+    public void show() {
+        System.out.println("Resolved Diamond - Class C");
+    }
+}
+
+public class DiamondProblemResolved {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show();
+    }
+}
+
+
+//difference between abstraction and interface
+
+abstract class Animal {
+    abstract void makeSound(); // abstract method
+    void eat() { System.out.println("Animal eats"); } // concrete method
+}
+
+
+interface Animal {
+    void makeSound(); // implicitly public + abstract
+}
+

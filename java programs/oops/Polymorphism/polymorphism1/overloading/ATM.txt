@@ -1,0 +1,23 @@
+class ATM {
+  void login(String cardNumber) {
+    System.out.prinln("Logged in using card");
+  }
+
+  void login(String mobile, int otp) {
+    System.out.println("Logged in using mobile otp");
+  }
+
+  void login(int accNumber, String password) {
+    System.out.println("Logged in using account number");
+  }
+}
+
+public class ATMDemo {
+    public static void main(String[] args) {
+        ATM a = new ATM();
+        a.login("1234567891012");
+        a.login("9600719905" , 2512);
+        a.login("037801000025149","vimal");
+
+ }
+}

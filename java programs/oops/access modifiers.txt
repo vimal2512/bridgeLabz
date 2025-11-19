@@ -1,0 +1,4 @@
+private	Full encapsulation - (only inside class)
+default	Package - level sharing
+protected	Subclass-level sharing
+public	Accessible anywhere

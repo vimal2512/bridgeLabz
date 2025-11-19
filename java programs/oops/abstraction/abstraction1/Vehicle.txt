@@ -1,0 +1,37 @@
+//2. Abstract Class with Constructor & Method
+
+
+abstract class Vehicle {
+  Vehicle() {
+    System.out.println("Vehicle created");
+  }
+  
+  abstract void start();
+
+  void fuel() {
+     System.out.println("Fuels with petrol and diesel");
+   }
+}
+
+
+class Car extends Vehicle {
+    void start() {
+         System.out.println("Car started with key");
+    }
+}
+
+
+public class VehicleDemo {
+   public static void main(String[] args) {
+      vehicle v = new Car();
+      v.start();   // abstract method implementation
+      v.fuel();    // concrete method from parent
+}
+}
+
+
+Output:
+
+Vehicle created
+Car started with key
+Fuels with petrol/diesel

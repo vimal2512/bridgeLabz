@@ -1,0 +1,138 @@
+1. Instance Variable Example
+
+class Student {
+    String name; // instance variable
+
+    void setName(String newName) {
+        name = newName; // this.name = newName;
+    }
+
+    void printName() {
+        System.out.println("Name: " + name);
+    }
+
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = new Student();
+
+        s1.setName("Vimal");
+        s2.setName("Raj");
+
+        s1.printName(); // Output: Vimal
+        s2.printName(); // Output: Raj
+    }
+}
+
+
+ 2. Static Variable Example
+    Shared across all objects of the class
+
+class Counter {
+    static int count = 0; // static variable
+
+    Counter() {
+        count++;  // increase the count when a new object is created
+    }
+
+    void showCount() {
+        System.out.println("Count: " + count);
+    }
+
+    public static void main(String[] args) {
+        Counter c1 = new Counter();
+        Counter c2 = new Counter();
+        Counter c3 = new Counter();
+        
+        c1.showCount(); // Output: Count: 3
+        c2.showCount(); // Output: Count: 3
+        c3.showCount(); // Output: Count: 3
+    }
+}
+
+class Student {
+    int id;
+    String name;
+    static String college = "IIT Chennai"; // shared
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    void display() {
+        System.out.println(id + " " + name + " " + college);
+    }
+}
+
+public class StaticDemo {
+    public static void main(String[] args) {
+        Student s1 = new Student(1, "Vimal");
+        Student s2 = new Student(2, "Raj");
+
+        s1.display();
+        s2.display();
+
+        // You can also update college
+        Student.college = "IIT Madras";
+
+        s1.display();
+        s2.display();
+    }
+}
+
+class Bank {
+    static double interestRate = 7.0;
+
+    static void setRate(double rate) {
+        interestRate = rate;
+    }
+
+    static void showRate() {
+        System.out.println("Current Interest Rate: " + interestRate + "%");
+    }
+}
+
+public class BankDemo {
+    public static void main(String[] args) {
+        Bank.showRate(); // 7.0%
+        Bank.setRate(8.5);
+        Bank.showRate(); // 8.5%
+    }
+}
+
+
+
+
+3. Local Variable Example
+   Exists only inside a method.
+    
+   class LocalExample {
+    void show() {
+        int localValue = 10; // local variable
+        System.out.println("Local value: " + localValue);
+    }
+
+    public static void main(String[] args) {
+        LocalExample obj = new LocalExample();
+        obj.show(); // Output: Local value: 10
+        // System.out.println(localValue); ❌ Error: Cannot access outside method
+    }
+}
+
+ 4. Parameter Variable Example
+Passed to a method from outside.
+
+class ParamExample {
+    void greet(String name) { // name is parameter variable
+        System.out.println("Hello, " + name);
+    }
+
+    public static void main(String[] args) {
+        ParamExample p = new ParamExample();
+        p.greet("Vimal Raj"); // Output: Hello, Vimal Raj
+    }
+}
+
+
+
+

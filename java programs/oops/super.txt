@@ -1,0 +1,74 @@
+Example 1: super() — Calling parent constructor
+
+class Animal {
+    Animal() {
+        System.out.println("Animal constructor called");
+    }
+}
+
+class Dog extends Animal {
+    Dog() {
+        super(); // calls Animal's constructor
+        System.out.println("Dog constructor called");
+    }
+
+    public static void main(String[] args) {
+        Dog d = new Dog();
+    }
+}
+
+Output:
+  Animal constructor called
+  Dog constructor called
+
+
+Example 2: super.variable — Accessing parent variable
+
+class Animal {
+    String type = "Animal";
+}
+
+class Dog extends Animal {
+    String type = "Dog";
+
+    void printType() {
+        System.out.println("Child type: " + type);         // Dog
+        System.out.println("Parent type: " + super.type);   // Animal
+    }
+
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.printType();
+    }
+}
+
+ Output:
+   Child type: Dog
+   Parent type: Animal
+
+
+Example 3: super.method() — Calling parent method
+
+class Animal {
+    void makeSound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+
+    void callParentSound() {
+        super.makeSound(); // call parent class method
+    }
+
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.makeSound();        // Dog barks
+        d.callParentSound();  // Animal sound
+    }
+}
+
+

@@ -1,0 +1,23 @@
+//Overloading by Changing Order of Parameters
+
+public class OverloadOrder {
+  void display(String name, int age) {
+   System.out.println("Name: " + name + ", Age: " + age);
+ } 
+
+ void display(int age, String name) {
+    System.out.println("Age: " + age + ", Name: " + name);
+ }
+
+  public static void main(String[] args) {
+        OverloadOrder obj = new OverloadOrder();
+        obj.display("Vimal", 25);
+        obj.display(30, "Raj");
+  }
+}
+
+
+Output:
+
+Name: Vimal, Age: 25
+Age: 30, Name: Raj

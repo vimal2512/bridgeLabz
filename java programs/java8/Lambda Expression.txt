@@ -1,0 +1,331 @@
+What Is a Lambda Expression?
+    A Lambda Expression is a shorthand way to write anonymous functions   (functions without names).
+
+    Lambda expressions are just a syntax to implement abstract methods of functional interfaces.
+
+Syntax:
+(parameter list) -> { body }
+
+ 1. Print a Message using Runnable
+    Concepts: No parameters, no return value. Functional Interface: Runnable.
+
+public class LambdaRunnableDemo {
+  public static void main(String[] args) {
+    Runnable task = () -> System.out.println("Lambda says: Hello, World!");
+    new Thread(task).start(); // runs lambda in a new thread
+ }
+}
+
+ What is Runnable?
+    Runnable is a functional interface in Java. It has only one abstract method.Which means we can use a lambda expression to implement it!
+     
+    @FunctionalInterface
+public interface Runnable {
+    void run();
+}
+
+Running the Lambda in a Thread:
+
+new Thread(task).start();
+
+Thread constructor accepts a Runnable object.
+start() tells the JVM to create a new thread and run the task.run() method concurrently.
+So "Lambda says: Hello, World!" is printed from the new thread.
+
+
+
+2. Sort a List of Strings Alphabetically
+   Concepts: Passing lambda as an argument, 2-parameter lambda, comparator logic.
+
+
+import java.util.*;
+
+public class LambdaStringSort {
+  public static void main(String[] args) {
+     List<String> names = Arrays.asList("Zara", "Alex", "Mohan", "Brian");
+     
+     names.sort((s1, s2) -> s1.compareTo(s2));  // Lambda for comparator
+     System.out.println(names);
+  }
+}
+
+
+ Output:
+ [Alex, Brian, Mohan, Zara]
+
+
+3. Filter Even Numbers from a List
+   Concepts: Predicate interface, stream filter, method chaining.
+
+   
+   
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class LambdaEvenFilter {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(10, 15, 22, 33, 44);
+
+        Predicate<Integer> isEven = n -> n % 2 == 0;
+
+        List<Integer> evenNumbers = numbers.stream()
+                                           .filter(isEven)
+                                           .collect(Collectors.toList());
+
+        System.out.println("Even Numbers: " + evenNumbers);
+    }
+}
+
+Note:
+  java.util.function.Predicate → functional interface used to define a boolean test condition (i.e., n -> n % 2 == 0)
+
+  java.util.stream.Collectors → provides collect() method to convert streams into lists or other collections.
+
+numbers.stream()
+→ Converts the list into a stream for functional operations.
+
+.filter(isEven)
+→ Applies the isEven predicate to each element. Only those for which the predicate returns true are passed.
+
+.collect(Collectors.toList())
+→ Collects the filtered results back into a new list.
+
+
+
+4. Create a Calculator using Lambda (Custom Functional Interface)
+    Concepts: Custom functional interface, parameterized lambda, return values.
+
+@FunctionalInterface
+interface Calculator {
+    int operate(int a, int b);
+}
+
+public class LambdaCalculator {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        Calculator multiply = (a, b) -> a * b;
+
+        System.out.println("Sum: " + add.operate(10, 20));
+        System.out.println("Product: " + multiply.operate(10, 20));
+    }
+}
+
+
+
+
+5. Sort List of Employees by Salary (Real-World Example)
+   Concepts: Sorting complex objects using lambda + comparator, method reference.
+
+
+
+import java.util.*;
+
+class Employee {
+    String name;
+    int salary;
+
+    Employee(String name, int salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public String toString() {
+        return name + ": " + salary;
+    }
+}
+
+public class LambdaEmployeeSort {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alex", 40000),
+            new Employee("Brian", 60000),
+            new Employee("Zara", 50000)
+        );
+
+        employees.sort((e1, e2) -> e1.salary - e2.salary);
+
+        employees.forEach(System.out::println);
+    }
+}
+
+Output:
+
+Alex: 40000
+Zara: 50000
+Brian: 60000
+
+
+Note:
+
+ Printing the List
+ employees.forEach(System.out::println);
+
+Uses method reference (System.out::println) to print each Employee in the sorted list.
+Internally calls toString() of each Employee.
+
+
+6. Filter and Collect Names Starting with "A"
+   Concepts: filter, collect, Predicate, Stream
+
+     
+import java.util.*;
+import java.util.stream.*;
+
+public class FilterNames {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Ankit", "David", "Amar");
+
+        List<String> filtered = names.stream()
+                                     .filter(name -> name.startsWith("A"))
+                                     .collect(Collectors.toList());
+
+        System.out.println("Names starting with A: " + filtered);
+    }
+}
+
+Output:
+  Names starting with A: [Alice, Ankit, Amar]
+
+
+7. Convert List of Strings to Uppercase
+   Concepts: map, method reference, Function
+
+   import java.util.*;
+   import java.util.stream.*;
+
+   public class UppercaseConverter {
+      public static void main(String[] args) {
+        List<String> words = Arrays.asList("java", "lambda", "stream");
+
+        List<String> upper = words.stream()
+                                  .map(String::toUpperCase)
+                                  .collect(Collectors.toList());
+
+          System.out.println(upper);
+      }
+   }
+
+Note:
+  This is the main transformation step.
+  The map() method applies a function to each element in the stream.
+  Here, String::toUpperCase is a method reference, which is a shorter way of writing:
+
+ Output:
+   [JAVA, LAMBDA, STREAM]
+
+
+
+8.Sum All Even Numbers
+  Concepts: filter, mapToInt, sum, Primitive Streams
+
+  import java.util.*;
+  import java.util.stream.*;
+
+  public class SumEvenNumbers {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        int sum = numbers.stream()
+                         .filter(n -> n % 2 == 0)
+                         .mapToInt(Integer::intValue)
+                         .sum();
+
+        System.out.println("Sum of even numbers: " + sum);
+     }
+   }
+
+Output:
+Sum of even numbers: 12
+
+ Note:
+   .mapToInt(Integer::intValue):
+Converts the Integer objects into primitive int values to use primitive streams (faster and more efficient).
+   
+
+9. Sort List of Students by Marks
+   Concepts: Comparator.comparing, lambda, custom object sorting
+
+import java.util.*;
+
+class Student {
+    String name;
+    int marks;
+
+    Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public String toString() {
+        return name + ": " + marks;
+    }
+}
+
+public class SortStudents {
+    public static void main(String[] args) {
+        List<Student> students = Arrays.asList(
+            new Student("Zara", 85),
+            new Student("Alex", 92),
+            new Student("Brian", 78)
+        );
+
+        students.sort(Comparator.comparing(s -> s.marks));
+
+        students.forEach(System.out::println);
+    }
+}
+
+Note:
+  a Comparator is an interface used to define custom sorting logic for objects especially when you don’t (or can't) modify the original class.
+
+10. Use Optional with map to Avoid NullPointerException
+Concepts: Optional, map, orElse, Supplier
+
+What's the goal?
+   Avoid NullPointerException when dealing with potentially null values like String name = null; by using Java’s Optional class.
+
+What is Optional?
+   Optional<T> is a container object that may or may not contain a non-null value.
+It was introduced in Java 8 to avoid boilerplate null checks.
+
+
+import java.util.Optional;
+
+public class OptionalExample {
+    public static void main(String[] args) {
+        String name = "John";
+
+        Optional<String> optionalName = Optional.ofNullable(name);
+
+        String upper = optionalName.map(String::toUpperCase)
+                                   .orElse("UNKNOWN");
+
+        System.out.println("Uppercase: " + upper);
+    }
+}
+
+ OUTPUT:
+  If name = "John"
+  Output: Uppercase: JOHN
+
+  If name = null
+  Output: Uppercase: UNKNOWN
+
+
+ 
+
+Note:
+  Optional.ofNullable(...) creates an Optional:
+  If name is non-null, it wraps the value.
+  If name is null, it creates an empty Optional (no value inside)
+  
+  .map(String::toUpperCase)
+  If a value is present, it applies toUpperCase() on it.
+  If empty, map is skipped.
+
+  .orElse("UNKNOWN")
+   If the Optional is empty (i.e., name == null), it returns "UNKNOWN"
+
+
+

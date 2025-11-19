@@ -1,0 +1,40 @@
+class Student {
+    // private data → can't be accessed directly outside
+    private String name;
+    private int age;
+
+    // public setter methods
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public void setAge(int newAge) {
+        age = newAge;
+    }
+
+    // public getter methods
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class EncapsulationDemo {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setName("Vimal Raj");
+        s.setAge(22);
+
+        System.out.println("Name: " + s.getName());
+        System.out.println("Age: " + s.getAge());
+    }
+}
+
+
+Output:
+
+Name: Vimal Raj
+Age: 22

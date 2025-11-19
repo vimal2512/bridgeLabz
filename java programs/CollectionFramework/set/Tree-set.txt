@@ -1,0 +1,204 @@
+1: Basic Operations with TreeSet (Sorted Order)
+
+import java.util.TreeSet;
+
+public class TreeSetBasics {
+    public static void main(String[] args) {
+        // Creating a TreeSet
+        TreeSet<String> animals = new TreeSet<>();
+
+        // Adding elements
+        animals.add("Dog");
+        animals.add("Cat");
+        animals.add("Elephant");
+        animals.add("Lion");
+        animals.add("Tiger");
+        animals.add("Cat"); // Duplicate, will not be added
+
+        // Display elements (automatically sorted)
+        System.out.println("Animals (sorted): " + animals);
+
+        // First and last elements
+        System.out.println("First: " + animals.first());
+        System.out.println("Last: " + animals.last());
+
+        // Check if an element exists
+        System.out.println("Contains Lion? " + animals.contains("Lion"));
+
+        // Remove an element
+        animals.remove("Dog");
+
+        // Display after removal
+        System.out.println("After removing Dog: " + animals);
+    }
+}
+
+
+Output:
+
+Animals (sorted): [Cat, Dog, Elephant, Lion, Tiger]
+First: Cat
+Last: Tiger
+Contains Lion? true
+After removing Dog: [Cat, Elephant, Lion, Tiger]
+
+2: TreeSet with Custom Sorting using Comparator
+
+//This example demonstrates how to sort elements in descending order using a custom comparator with TreeSet.
+
+import java.util.*;
+
+public class TreeSetCustomSorting {
+    public static void main(String[] args) {
+        // Custom comparator for descending order
+        Comparator<String> descendingOrder = (s1, s2) -> s2.compareTo(s1);
+
+        // TreeSet with custom comparator
+        TreeSet<String> names = new TreeSet<>(descendingOrder);
+
+        // Adding elements
+        names.add("Arun");
+        names.add("Bala");
+        names.add("Dinesh");
+        names.add("Chitra");
+        names.add("Bala"); // Duplicate, won't be added
+
+        // Displaying elements (now in descending order)
+        System.out.println("Names in Descending Order: " + names);
+    }
+}
+
+Output:
+
+Names in Descending Order: [Dinesh, Chitra, Bala, Arun]
+
+3: TreeSet with Custom Objects and Comparator
+
+This program demonstrates how to store custom objects in a TreeSet and sort them using a custom comparator.
+
+import java.util.*;
+
+class Student {
+    String name;
+    int marks;
+
+    Student(String name, int marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + marks + ")";
+    }
+}
+
+public class TreeSetCustomObjects {
+    public static void main(String[] args) {
+        // Comparator to sort by marks
+        Comparator<Student> byMarks = (s1, s2) -> Integer.compare(s1.marks, s2.marks);
+
+        // TreeSet with custom comparator
+        TreeSet<Student> students = new TreeSet<>(byMarks);
+
+        // Adding students
+        students.add(new Student("Arun", 85));
+        students.add(new Student("Bala", 75));
+        students.add(new Student("Chitra", 90));
+        students.add(new Student("Dinesh", 75)); // Same marks as Bala
+
+        // Displaying sorted students
+        for (Student s : students) {
+            System.out.println(s);
+        }
+    }
+}
+
+ Output:
+ 
+Bala (75)
+Dinesh (75)
+Arun (85)
+Chitra (90)
+
+
+ 4: TreeSet – Sorted Integers & HeadSet, TailSet Demo
+ 
+ This program demonstrates how TreeSet maintains sorted order and how to use headSet() and tailSet() to retrieve elements based on value ranges.
+
+Use Case: Store integers in a sorted way and extract subsets.
+
+import java.util.*;
+
+public class TreeSetHeadTail {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+
+        // Adding elements
+        numbers.add(50);
+        numbers.add(10);
+        numbers.add(40);
+        numbers.add(20);
+        numbers.add(30);
+
+        // TreeSet stores elements in sorted order
+        System.out.println("All Numbers (Sorted): " + numbers);
+
+        // Get all elements less than 30
+        System.out.println("HeadSet (<30): " + numbers.headSet(30));
+
+        // Get all elements greater than or equal to 30
+        System.out.println("TailSet (>=30): " + numbers.tailSet(30));
+
+        // Get elements between 20 (inclusive) and 50 (exclusive)
+        System.out.println("SubSet (20 to 50): " + numbers.subSet(20, 50));
+    }
+}
+
+Output:
+
+All Numbers (Sorted): [10, 20, 30, 40, 50]
+HeadSet (<30): [10, 20]
+TailSet (>=30): [30, 40, 50]
+SubSet (20 to 50): [20, 30, 40]
+
+Would you like to continue with Program 5: HashSet vs LinkedHashSet vs TreeSet – Comparison Demo?
+
+This program compares the ordering behavior of HashSet, LinkedHashSet, and TreeSet when inserting the same elements.
+
+ Use Case: Understand how different Set implementations handle order and sorting.
+
+
+import java.util.*;
+
+public class SetComparison {
+    public static void main(String[] args) {
+        // Elements to add
+        String[] names = { "Charlie", "Alice", "Bob", "David", "Alice" };
+
+        // HashSet (No order, no duplicates)
+        Set<String> hashSet = new HashSet<>(Arrays.asList(names));
+        System.out.println("HashSet (Unordered): " + hashSet);
+
+        // LinkedHashSet (Insertion order preserved, no duplicates)
+        Set<String> linkedHashSet = new LinkedHashSet<>(Arrays.asList(names));
+        System.out.println("LinkedHashSet (Insertion Order): " + linkedHashSet);
+
+        // TreeSet (Sorted order, no duplicates)
+        Set<String> treeSet = new TreeSet<>(Arrays.asList(names));
+        System.out.println("TreeSet (Sorted): " + treeSet);
+    }
+}
+
+Output:
+
+HashSet (Unordered): [Bob, Alice, Charlie, David]
+LinkedHashSet (Insertion Order): [Charlie, Alice, Bob, David]
+TreeSet (Sorted): [Alice, Bob, Charlie, David]
+
+
+
+
+
+
+

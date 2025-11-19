@@ -1,0 +1,25 @@
+// Downcasting (Parent → Child reference) — Only when the object is actually of child type
+
+ class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class DowncastingDemo {
+    public static void main(String[] args) {
+        Animal a = new Dog(); // Upcasting
+        Dog d = (Dog) a;      // ✅ Downcasting
+        d.bark();             // Now accessible
+    }
+}
+
+Output:
+
+Dog barks

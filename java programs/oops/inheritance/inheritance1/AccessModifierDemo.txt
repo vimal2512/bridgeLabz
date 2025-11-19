@@ -1,0 +1,48 @@
+class Animal {
+    public void run() {
+        System.out.println("Public: Running...");
+    }
+
+    protected void sleep() {
+        System.out.println("Protected: Sleeping...");
+    }
+
+    void eat() {
+        System.out.println("Default: Eating...");
+    }
+
+    private void breathe() {
+        System.out.println("Private: Breathing...");
+    }
+
+    public void callPrivate() {
+        breathe(); // private accessible only within same class
+    }
+}
+
+class Dog extends Animal {
+    void show() {
+        run();    // ✅ public
+        sleep();  // ✅ protected
+        eat();    // ✅ default (same package)
+        // breathe(); ❌ Error – private not inherited
+    }
+}
+
+public class AccessModifierDemo {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.run();
+        d.sleep();
+        d.eat();
+        d.callPrivate(); // access private indirectly
+    }
+}
+
+ Output:
+
+Public: Running...
+Protected: Sleeping...
+Default: Eating...
+Private: Breathing...
+

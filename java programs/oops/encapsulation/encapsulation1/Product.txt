@@ -1,0 +1,27 @@
+// E-Commerce: Product Details
+
+class Product {
+    private String name;
+    private double price;
+    private int stock;
+
+    public void setDetails(String name, double price, int stock) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public void getDetails() {
+        System.out.println("Product: " + name);
+        System.out.println("Price: ₹" + price);
+        System.out.println("Stock Available: " + stock + " units");
+    }
+}
+
+public class ProductDemo {
+    public static void main(String[] args) {
+        Product p = new Product();
+        p.setDetails("Wireless Mouse", 799.99, 45);
+        p.getDetails();
+    }
+}

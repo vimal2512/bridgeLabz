@@ -1,0 +1,132 @@
+class Employee {
+  private String name;
+  private int id;
+  private double salary;
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setName(int name) {
+    this.name = name;
+  }
+
+  public void setSalary(double salary) {
+     this.salary = salary;
+  }
+
+  public int getId() {
+     return id;
+   }
+
+  public String getName() {
+      return name;
+  }
+
+  public String getSalary() {
+      return salary;
+  }
+}
+
+public class EmployeeDemo {
+  public static void main(String[] args) {
+    Employee emp = new Employee();
+    emp.setId(101);
+    emp.setName("vimal");
+    emp.setSalary(45000.50);
+
+    System.out.println("Employee Id: " + emp.getId());
+    System.out.println("Employee name: " + emp.getName());
+    System.out.println("Salary : " + emp.getSalary());
+  }
+}
+
+class Student {
+  private String name;
+  private int age;
+ 
+  public void setName(String name) {
+      this.name = name;
+  }
+
+  public void setAge(String age) {
+      this.age = age;
+  }
+
+  public String getName() {
+     return name;
+   }
+
+  public int getAge() {
+     return age;
+  }
+
+}
+
+public class EncapsulationDemo {
+  public static void main(String[] args) {
+      Student s = new Student();
+      s.setName("Vimal");
+      s.setAge(29);
+      
+     System.out.println("Name: " + s.getName());
+        System.out.println("Age: " + s.getAge());
+  }
+}
+
+
+class BankAccount {
+   private double balance;
+
+   public void deposit(double amount) {
+      if(balance > 0)
+           balance += amount;
+   }
+
+   public void withdraw(double amount) {
+      if(balance > 0 && balance >= amount)
+            balance -= amount;
+   }
+
+   public double getBalance() {
+      return balance;
+   }
+} 
+
+
+public class BankDemo {
+   public static void main(String[] args) {
+      BankAccout acc = new BankAccount();
+      acc.deposit(4000);
+      acc.withdraw(1500); 
+
+    System.out.println("Remaining balance: " + acc.getBalance());
+  }
+}
+
+
+class Book {
+   private String title;
+   private String author;
+   private boolean isAvailable;
+   
+   public void setDetails( String title, String author, boolean isAvalable) {
+        this.title = title;
+        this.author = author;
+        this.boolean= Boolean;
+  }
+   
+  public void getDetails() {
+    System.out.println("Title: " + this.title);
+    System.out.println("Author: " + this.author);
+    System.out.println("Available: " + (isAvailable ? "yes: "no"));
+  }
+}
+
+public class LibraryDemo {
+  public static void main(String[] args) {
+      Book b = new Book();
+      b.setDetails("Effective java" + "Joshua Blouch", true);
+      b.getDetails();
+ }
+}

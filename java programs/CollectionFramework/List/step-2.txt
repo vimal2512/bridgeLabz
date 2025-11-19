@@ -1,0 +1,161 @@
+List Interface & Implementations
+
+What is List?
+   - It is a child interface of Collection.
+   - Maintains insertion order.
+   - Allows duplicate elements.
+   - Can access elements via index (like an array).
+
+Implementation	Best For	            Thread-safe?	        Allows nulls
+ArrayList	Fast random access (get/set)	❌ No	                   ✅ Yes
+LinkedList	Frequent add/remove in middle	❌ No	                   ✅ Yes
+Vector	        Legacy, synch version	        ✅ Yes	                   ✅ Yes
+Stack	      LIFO stack operations (legacy)   	✅ Yes	                   ✅ Yes
+
+1. ArrayList:
+   Best for random access and when you want a resizable array.
+   Internally uses a dynamic array that grows when needed (default capacity: 10).
+
+
+import java.util.*;
+
+public class ArrayListExample {
+  public static void main(String[] args) {
+    List<String> names = new ArrayList<>();
+    names.add("Java");
+    names.add("Python");
+    names.add("Java");  // allows duplicates
+
+    System.out.println("ArrayList: " + names);
+    System.out.println("Second element: " + names.get(1)); // Python
+  }
+}
+
+2. LinkedList
+    Best for frequent inserts/deletes (especially at beginning or middle)
+    Internally uses a doubly linked list.
+
+
+ import java.util.*;
+ 
+ public class LinkedListExample {
+   public static void main(String[] args) {
+     LinkedList<Integer> nums = new LinkedList<>();
+     nums.add(10);
+     nums.addFirst(5);   // add at beginning
+     nums.addLast(20);   // add at end
+
+     System.out.println("LinkedList: " + nums);  // [5, 10, 20]
+  }
+ }
+
+3. Vector (Legacy — not recommended for new code)
+   Thread-safe, but slow compared to ArrayList.
+
+import java.util.Vector;
+
+public class SimpleVector {
+  public static void main(String[] args) {
+     // Create a vector of strings
+     Vector<String> vec = new Vector<>();
+
+     // Add elements to vector
+     vec.add("One");
+     vec.add("Two");
+
+     //Print the vector
+     System.out.println("Vector: " + vec);
+  }
+}
+
+Output:
+
+Vector: [One, Two]
+
+import java.util.Vector;
+
+public class VectorExample {
+  public static void main(String[] args) {
+    // Create a vector of strings
+    Vector<String> fruits = new Vector<>();
+
+    //Add elements to the vector
+    fruits.add("Apple");
+    fruits.add("Banana");
+    fruits.add("Mango");
+    fruits.add("Banana");  // allows duplicates
+
+    // Insert at a specific index
+    fruits.add(1, "Orange");
+
+    // print all elements
+    System.out.println("Fruits Vector: " + fruits);
+
+    // Access an element by index
+    System.out.println("Element at index 2: " + fruits.get(2));
+
+    // Check if Vector contains an element
+    System.out.println("Contains Mango? " + fruits.contains("Mango")); 
+
+    // Remove an element by index
+    fruits.remove(3);  // removes Banana at index 3
+    System.out.println("After removal: " + fruits);
+
+    // Replace an element
+    fruits.set(0, "Pineapple");
+    System.out.println("After replacing index 0: " + fruits);
+
+    // Size of the vector
+    System.out.println("Size of vector: " + fruits.size());
+
+    //clear all elements
+    fruits.clear();
+    System.out.println("After clearing: " + fruits);
+    
+  }
+}
+
+Output:
+
+Fruits Vector: [Apple, Orange, Banana, Mango, Banana]
+Element at index 2: Banana
+Contains Mango? true
+After removal: [Apple, Orange, Banana, Banana]
+After replacing index 0: [Pineapple, Orange, Banana, Banana]
+Size of Vector: 4
+After clearing: []
+
+4. Stack (extends Vector)
+   Classic Last In First Out (LIFO) data structure.
+   Modern alternative: Use Deque (like ArrayDeque) for stack behavior — more efficient.
+
+   import java.util.*;
+
+   public class StackExample {
+    public static void main(String[] args) {
+       Stack<String> stack = new Stack<>();
+       stack.push("A");
+       stack.push("B");
+       stack.push("C");
+
+       System.out.println("Stack top: " + stack.peek()); // C
+       stack.pop();   // removes C
+       System.out.println("After pop: " + stack);
+     
+     }
+   }
+
+Key Methods of List Interface
+
+list.add(E e)
+list.add(int index, E element)
+list.get(int index)
+list.set(int index, E element)
+list.remove(int index)
+list.indexOf(Object o)
+list.contains(Object o)
+list.size()
+list.clear()
+list.isEmpty()
+
+   

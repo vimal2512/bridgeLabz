@@ -1,0 +1,192 @@
+Program 1: Basic LinkedList Operations
+Concepts Covered: Creation, adding elements, removing elements, accessing by index.
+
+import java.util.LinkedList;
+
+public class LinkedListBasics {
+    public static void main(String[] args) {
+        LinkedList<String> cities = new LinkedList<>();
+        cities.add("Chennai");
+        cities.add("Bangalore");
+        cities.add("Hyderabad");
+
+        System.out.println("Cities: " + cities);
+
+        cities.addFirst("Mumbai");
+        cities.addLast("Delhi");
+
+        System.out.println("After additions: " + cities);
+
+        cities.remove("Hyderabad");
+        cities.removeFirst();
+
+        System.out.println("After removals: " + cities);
+
+        System.out.println("First city: " + cities.getFirst());
+        System.out.println("Last city: " + cities.getLast());
+    }
+}
+
+output:
+
+Cities: [Chennai, Bangalore, Hyderabad]
+After additions: [Mumbai, Chennai, Bangalore, Hyderabad, Delhi]
+After removals: [Chennai, Bangalore, Delhi]
+First city: Chennai
+Last city: Delhi
+
+Program 2: Iterating Through LinkedList
+
+Concepts Covered: for, for-each, Iterator, ListIterator (forward + reverse).
+
+import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.ListIterator;
+
+public class LinkedListIteration {
+    public static void main(String[] args) {
+        LinkedList<String> animals = new LinkedList<>();
+        animals.add("Lion");
+        animals.add("Tiger");
+        animals.add("Elephant");
+
+        System.out.println("For Loop:");
+        for (int i = 0; i < animals.size(); i++) {
+            System.out.println(animals.get(i));
+        }
+
+        System.out.println("For-each Loop:");
+        for (String animal : animals) {
+            System.out.println(animal);
+        }
+
+        System.out.println("Iterator:");
+        Iterator<String> it = animals.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+
+        System.out.println("ListIterator Reverse:");
+        ListIterator<String> listIt = animals.listIterator(animals.size());
+        while (listIt.hasPrevious()) {
+            System.out.println(listIt.previous());
+        }
+    }
+}
+
+output:
+
+For Loop:
+Lion
+Tiger
+Elephant
+For-each Loop:
+Lion
+Tiger
+Elephant
+Iterator:
+Lion
+Tiger
+Elephant
+ListIterator Reverse:
+Elephant
+Tiger
+Lion
+
+Program 3: LinkedList of Custom Objects
+
+Concepts Covered: Storing and displaying custom class objects.
+
+import java.util.LinkedList;
+
+class Employee {
+    int id;
+    String name;
+
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String toString() {
+        return id + " - " + name;
+    }
+}
+
+public class LinkedListCustomObjects {
+    public static void main(String[] args) {
+        LinkedList<Employee> list = new LinkedList<>();
+        list.add(new Employee(1, "Vimal"));
+        list.add(new Employee(2, "Raj"));
+
+        for (Employee emp : list) {
+            System.out.println(emp);
+        }
+    }
+}
+
+
+output:
+
+1 - Vimal
+2 - Raj
+
+
+Program 4: Cloning and SubList
+Concepts Covered: clone(), subList(), copying and partial view.
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class LinkedListCloneAndSubList {
+    public static void main(String[] args) {
+        LinkedList<String> tech = new LinkedList<>();
+        tech.add("Java");
+        tech.add("Python");
+        tech.add("JavaScript");
+        tech.add("Go");
+
+        LinkedList<String> cloned = (LinkedList<String>) tech.clone();
+        System.out.println("Cloned list: " + cloned);
+
+        List<String> subList = tech.subList(1, 3); // Python, JavaScript
+        System.out.println("Sublist (1 to 2): " + subList);
+    }
+}
+
+output:
+
+Cloned list: [Java, Python, JavaScript, Go]
+Sublist (1 to 2): [Python, JavaScript]
+
+Program 5: Sorting and Reversing a LinkedList
+Concepts Covered: Collections.sort(), Collections.reverse()
+
+import java.util.LinkedList;
+import java.util.Collections;
+
+public class LinkedListSortReverse {
+    public static void main(String[] args) {
+        LinkedList<String> languages = new LinkedList<>();
+        languages.add("Java");
+        languages.add("C++");
+        languages.add("Python");
+
+        Collections.sort(languages);
+        System.out.println("Sorted: " + languages);
+
+        Collections.reverse(languages);
+        System.out.println("Reversed: " + languages);
+    }
+}
+
+output:
+
+Sorted: [C++, Java, Python]
+Reversed: [Python, Java, C++]
+
+
+Note:
+
+Use ArrayList if: You mostly read/access elements by index.
+Use LinkedList if: You frequently insert/delete in the middle or at the start.

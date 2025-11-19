@@ -1,0 +1,1364 @@
+// Node, the basic building block of a singly linked list.
+// Each node contains:
+       data: the actual data (an int here).
+       next: a reference to the next node in the list
+
+1.Single linked list
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class CreateLinkedList {
+    public static void main(String[] args) {
+    
+    // First node with data 10
+        Node head = new Node(10);
+                  
+     // second node with data 20 and links it to the head node
+        head.next = new Node(20);
+
+   .// third node with data 30 and links it to the second node.
+        head.next.next = new Node(30);             
+
+        // Traverse the list and print values
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+Output:
+
+10 20 30
+
+
+2. Doubly Linked List
+
+Each node has two pointers: one to the next node and one to the previous node.
+Each node has a pointer to the next and the previous node.
+Traversal can move forward and backward.
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class DoublyLinkedList {
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        Node second = new Node(20);
+        Node third = new Node(30);
+
+        head.next = second;
+        second.prev = head;
+        second.next = third;
+        third.prev = second;
+
+        // Forward traversal
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+Output:
+10 20 30
+
+
+3. Circular Linked List
+
+The last node points back to the first node, forming a circle. Can be singly or doubly circular.
+
+Last node points back to head instead of null.
+
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class CircularLinkedList {
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        Node second = new Node(20);
+        Node third = new Node(30);
+
+        head.next = second;
+        second.next = third;
+        third.next = head; // Circular link
+
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != head);
+    }
+}
+
+Output:
+10 20 30
+
+note: In a Circular Linked List, the last node points back to the first node, not null. so do while
+
+if we use while it ended up to infinite loop
+
+
+//Employee management system
+
+Step 1: Create a node (i.e., blueprint for Employee)
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+    Employee next;
+You’re creating a class called Employee, where each object will be one employee.
+
+id, name, and salary are details of the employee.
+
+Employee next; is a pointer (or reference) to the next Employee in the list — this is what makes it a linked list.
+
+    Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.next = null;
+    }
+}
+This is the constructor used when you create a new employee.
+
+this.id = id; means: assign the value of the argument id to the class's id.
+
+next is set to null by default because the new employee is not linked to anyone yet.
+
+🔹 Step 2: Create the main EmployeeManagement class
+
+public class EmployeeManagement {
+    Employee head = null;
+head points to the first employee in the list.
+
+Initially, it’s null because the list is empty.
+
+🔹 Method 1: Add a new employee
+
+    public void addEmployee(int id, String name, double salary) {
+        Employee newEmp = new Employee(id, name, salary);
+You create a new Employee using the constructor.
+
+newEmp is now a node with its own data and next = null.
+
+
+        if (head == null) {
+            head = newEmp;
+        } else {
+If this is the first employee, set head to point to newEmp.
+
+
+            Employee temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newEmp;
+        }
+If the list already has employees:
+
+Start from head and move through the list using temp = temp.next;.
+
+Stop at the last employee (temp.next == null) and attach the new employee using temp.next = newEmp.
+
+
+        System.out.println("✅ Employee Added: " + name);
+    }
+Confirm that the employee was added.
+
+🔹 Method 2: Display all employees
+
+    public void displayEmployees() {
+        if (head == null) {
+            System.out.println("No records to display.");
+            return;
+        }
+If the list is empty, say so.
+
+
+        System.out.println("\n📋 Employee Records:");
+        Employee temp = head;
+        while (temp != null) {
+            System.out.println("ID: " + temp.id + ", Name: " + temp.name + ", Salary: " + temp.salary);
+            temp = temp.next;
+        }
+    }
+Start from head, and print each employee’s details.
+
+Keep moving forward with temp = temp.next; until temp == null.
+
+🔹 Method 3: Delete an employee by ID
+
+    public void deleteEmployee(int id) {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+If the list is empty, you can’t delete anything.
+
+
+        if (head.id == id) {
+            head = head.next;
+            System.out.println("🗑️ Employee with ID " + id + " deleted.");
+            return;
+        }
+If the employee to delete is the first one, just move the head to point to the second one.
+
+
+        Employee temp = head;
+        while (temp.next != null && temp.next.id != id) {
+            temp = temp.next;
+        }
+Otherwise, move forward until you find the previous node of the target.
+
+
+        if (temp.next == null) {
+            System.out.println("❌ Employee not found.");
+        } else {
+            temp.next = temp.next.next;
+            System.out.println("🗑️ Employee with ID " + id + " deleted.");
+        }
+    }
+If you reached the end (temp.next == null), the ID was not found.
+
+Else, delete by skipping the node: temp.next = temp.next.next.
+
+🔹 Method 4: Search for employee by ID
+
+    public void searchEmployee(int id) {
+        Employee temp = head;
+        while (temp != null) {
+            if (temp.id == id) {
+                System.out.println("🔍 Employee Found: ID: " + temp.id + ", Name: " + temp.name + ", Salary: " + temp.salary);
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("❌ Employee with ID " + id + " not found.");
+    }
+Start from head, go one by one, and check temp.id == id.
+
+If found, print details.
+
+If not, go to the next.
+
+If list ends, say not found.
+
+🔹 main() — Where it all begins
+
+    public static void main(String[] args) {
+        EmployeeManagement em = new EmployeeManagement();
+Create a new object em to call the methods.
+
+
+        em.addEmployee(101, "Alice", 50000);
+        em.addEmployee(102, "Bob", 55000);
+        em.addEmployee(103, "Charlie", 60000);
+Add 3 employees.
+
+
+        em.displayEmployees();
+Show all employee records.
+
+
+        em.searchEmployee(102);
+Search for Bob (ID: 102)
+
+
+        em.deleteEmployee(102);
+Delete Bob.
+
+
+        em.displayEmployees();
+    }
+}
+Show the updated list (Bob will be missing).
+
+
+//Playlist Management Using Circular Linked List
+
+class Song {
+    String title;
+    Song next, prev;
+
+    Song(String title) {
+        this.title = title;
+        this.next = this.prev = null;
+    }
+}
+
+public class Playlist {
+    private Song head = null;
+    private Song current = null;
+
+    // Add song to playlist
+    public void addSong(String title) {
+        Song newSong = new Song(title);
+
+        if (head == null) {
+            head = newSong;
+            head.next = head;
+            head.prev = head;
+            current = head;
+        } else {
+            Song last = head.prev;
+
+            last.next = newSong;
+            newSong.prev = last;
+            newSong.next = head;
+            head.prev = newSong;
+        }
+    }
+
+    // Show current song
+    public void showCurrent() {
+        if (current != null) {
+            System.out.println("Currently Playing: " + current.title);
+        } else {
+            System.out.println("Playlist is empty.");
+        }
+    }
+
+    // Play next song
+    public void nextSong() {
+        if (current != null) {
+            current = current.next;
+            showCurrent();
+        }
+    }
+
+    // Play previous song
+    public void previousSong() {
+        if (current != null) {
+            current = current.prev;
+            showCurrent();
+        }
+    }
+
+    // Display entire playlist once
+    public void showPlaylist() {
+        if (head == null) {
+            System.out.println("Playlist is empty.");
+            return;
+        }
+
+        System.out.println("Playlist:");
+        Song temp = head;
+        do {
+            System.out.println("- " + temp.title);
+            temp = temp.next;
+        } while (temp != head);
+    }
+
+    public static void main(String[] args) {
+        Playlist playlist = new Playlist();
+
+        playlist.addSong("Shape of You");
+        playlist.addSong("Blinding Lights");
+        playlist.addSong("Levitating");
+        playlist.addSong("Closer");
+
+        playlist.showPlaylist();
+        playlist.showCurrent();
+
+        playlist.nextSong();
+        playlist.nextSong();
+        playlist.previousSong();
+        playlist.nextSong();
+        playlist.nextSong();  // Loops to first song again
+    }
+}
+
+//Stack
+//Last in first out
+
+class Stack {
+    int maxSize = 5;
+    int[] stack = new int[maxSize];
+    int top = -1;   // Starts at -1 to indicate: Stack is empty.
+                    // Every time you push a number, top increases by 1.
+                    // Every time you pop a number, top decreases by 1.
+
+    void push(int data) {
+        if (top == maxSize - 1) {   //If top is already 4, it means the stack is full (0 to 4 is 5 slots).
+            System.out.println("Stack Overflow");
+        } else {
+   ++top means first increase top (e.g., -1 → 0), then store the data.
+    stack[top] = data puts the value at the correct position
+            stack[++top] = data;
+        }
+    }
+
+    void pop() {
+        if (top == -1) {  // If top is -1, //it means stack is empty → "Stack Underflow"
+            System.out.println("Stack Underflow");
+        } else {
+           //Then decrease top using top--.
+            System.out.println("Popped: " + stack[top--]);
+        }
+    }
+
+    void peek() {
+        if (top != -1)
+            System.out.println("Top element: " + stack[top]);
+        else
+            System.out.println("Stack is empty");
+    }
+
+    void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            for (int i = top; i >= 0; i--) {
+                System.out.print(stack[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Output Example:
+
+Stack s = new Stack();
+s.push(10); // [10]
+s.push(20); // [10, 20]
+s.push(30); // [10, 20, 30]
+s.display(); // 30 20 10
+s.pop();     // removes 30
+s.peek();    // shows 20
+
+
+/Queue
+//First In First Out
+
+ class Queue {
+    int front = 0;  // points to the index of the first element in the queue.
+    int rear = -1;  // points to the index of the last inserted element. Starts from -1 because no element has been added yet.
+    int maxSize = 5;
+    int[] queue = new int[maxSize];
+
+    void enqueue(int data) {
+      //Checks if the queue is full. For a size 5 array, rear can only go up to 4.
+        if (rear == maxSize - 1) {  
+            System.out.println("Queue Overflow");
+        } else {
+            queue[++rear] = data;  //increments rear and adds the new data to that index.
+        }
+    }
+
+    void dequeue() {
+        if (front > rear) { // Means queue is empty.
+            System.out.println("Queue Underflow");
+        } else {
+            System.out.println("Dequeued: " + queue[front++]);  Prints the   element at the front, then increments front to move the pointer forward
+        }
+    }
+
+    void display() {
+        if (front > rear) {  
+            System.out.println("Queue is empty");
+        } else {
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+example scenario for dequeue:
+
+front = 0;
+rear = 2;
+queue = [10, 20, 30, _, _];
+
+
+Call dequeue():
+
+Output: Dequeued: 10
+
+Now: front = 1
+
+Call again:
+
+Output: Dequeued: 20
+
+Now: front = 2
+
+Call again:
+
+Output: Dequeued: 30
+
+Now: front = 3
+
+Call again:
+
+Since front (3) > rear (2) → Output: Queue Underflow
+
+
+//Balanced paranthesis checker
+
+import java.util.Stack;
+
+public class BalancedParenthesesChecker {
+
+    public static boolean isBalanced(String expr) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : expr.toCharArray()) {
+            // If opening bracket, push to stack
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            }
+            // If closing bracket
+            else if (ch == ')' || ch == '}' || ch == ']') {
+                // If stack is empty or top doesn't match
+                if (stack.isEmpty()) return false;
+
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') ||
+                    (ch == '}' && top != '{') ||
+                    (ch == ']' && top != '[')) {
+                    return false;
+                }
+            }
+        }
+
+        // If stack is empty → all matched
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        String input = "{[()]}";
+        if (isBalanced(input)) {
+            System.out.println("Balanced");
+        } else {
+            System.out.println("Not Balanced");
+        }
+    }
+}
+
+
+A string is balanced if:
+
+Every open bracket has a matching close bracket.
+
+They are closed in the correct order — like stacking and unstacking plates 🍽️.
+
+Example:
+
+✅ "({[]})" → OK
+❌ "({[)]}" → Wrong order
+❌ "((())" → Missing one )
+
+🧰 What tool do we use?
+We use a stack 🥞
+
+Think of a stack like:
+
+A pile of books
+
+You push to add to the top
+
+You pop to remove from the top
+
+🎮 Let’s simulate it
+Let’s say the input is:
+
+css
+Copy code
+({[]})
+We read one character at a time:
+
+Step-by-step:
+See ( → it’s an opening bracket → push it
+➜ Stack: (
+
+See { → also opening → push it
+➜ Stack: ( {
+
+See [ → opening → push it
+➜ Stack: ( { [
+Now our stack is 3 plates high 🍽️
+
+See ] → it’s a closing bracket
+➜ Look at top: [
+➜ It matches! ✅ → pop it
+➜ Stack: ( {
+
+See } → it’s closing
+➜ Top is { → matches ✅ → pop it
+➜ Stack: (
+
+See ) → closing
+➜ Top is ( → matches ✅ → pop it
+➜ Stack: now empty ✅✅✅
+
+So this is Balanced!
+
+//Ticket Counter Management Using Queues
+
+// Class representing a ticket counter using queue logic
+class TicketCounter {
+
+    int front = 0; // Index where the first person in the queue is
+    int rear = -1; // Index where the last person was added
+    int maxSize = 5; // Maximum number of people allowed in queue
+    String[] queue = new String[maxSize]; // Array to hold names of people in line
+
+    // Function to add a person to the queue
+    void enqueue(String name) {
+        // Check if queue is full
+        if (rear == maxSize - 1) {
+            System.out.println("Line is full. " + name + " can't join.");
+        } else {
+            // Move rear one step forward and add the name
+            queue[++rear] = name;
+            System.out.println(name + " joined the line.");
+        }
+    }
+
+    // Function to remove a person from the queue (they get the ticket)
+    void dequeue() {
+        // If front is beyond rear, it means no one is in queue
+        if (front > rear) {
+            System.out.println("No one in line.");
+        } else {
+            // Print the name of the person getting the ticket and move front forward
+            System.out.println(queue[front++] + " got the ticket and left.");
+        }
+    }
+
+    // Function to display current people in the queue
+    void display() {
+        // If queue is empty
+        if (front > rear) {
+            System.out.println("No one in line.");
+        } else {
+            // Print all names from front to rear
+            System.out.print("Current line: ");
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i] + " ");
+            }
+            System.out.println(); // Move to next line after printing names
+        }
+    }
+}
+
+
+// Student database management
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StudentDatabase {
+    public static void main(String[] args) {
+        //Stores student id as a key and student name as value
+        HashMap<Integer, String> studentMap = new HashMap<>(); 
+        Scanner scanner = new Scanner(System.in);            
+
+       // keep showing menu until user exits by choosing 4
+        while (true) {
+            System.out.println("\n1. Add Student");
+            System.out.println("2. Remove Student");
+            System.out.println("3. Display Students");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt(); //reads numbers users enters 1234
+
+Depending on what number the user entered, we perform different tasks
+(1=> add ,  2=> remove , 3 => display , 4 => exit)
+
+            switch (choice) { 
+                case 1:
+                    System.out.print("Enter student ID: ");
+                    int id = scanner.nextInt();// reads just the number
+                    scanner.nextLine();//clears leftover \n from input buffer
+                    System.out.print("Enter student name: ");
+                String name = scanner.nextLine(); //corectly reads full input
+                    studentMap.put(id, name); //Add to HashMap
+                    System.out.println("Student added successfully!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter student ID to remove: ");
+                    int removeId = scanner.nextInt(); // Step 9
+                    if (studentMap.containsKey(removeId)) {
+                        studentMap.remove(removeId); // Step 10
+                        System.out.println("Student removed successfully!");
+                    } else {
+                        System.out.println("Student ID not found.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("--- Student Records ---");
+                    for (int studentId : studentMap.keySet()) {
+                        System.out.println("ID: " + studentId + ", Name: " + studentMap.get(studentId));
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting... Thank you!");
+                    return; 
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
+
+//Word Frequency Counter using HashMap ie occurrences
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class WordFrequencyCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 1. Take input from user
+        System.out.println("Enter a sentence:");
+        String input = scanner.nextLine();
+
+        // 2. Convert to lowercase to count words case-insensitively
+        input = input.toLowerCase();
+
+        // 3. Split the input string into words using space
+        String[] words = input.split("\\s+");
+
+        // 4. Create a HashMap to store word frequencies
+        HashMap<String, Integer> wordCountMap = new HashMap<>();
+
+        // 5. Loop through the words and count them
+        for (String word : words) {
+            // Ignore punctuation
+            word = word.replaceAll("[^a-z]", ""); // remove non-letter characters
+
+            if (word.isEmpty()) continue; // skip if word is empty after removing punctuation
+
+            if (wordCountMap.containsKey(word)) {
+                // Word already exists → increment its count
+                wordCountMap.put(word, wordCountMap.get(word) + 1);
+            } else {
+                // New word → set count to 1
+                wordCountMap.put(word, 1);
+            }
+        }
+
+        // 6. Print the word frequency
+        System.out.println("\nWord Frequencies:");
+        for (String word : wordCountMap.keySet()) {
+            System.out.println(word + ": " + wordCountMap.get(word));
+        }
+
+        scanner.close();
+    }
+}
+
+
+//phone directory using hashmap
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class PhoneDirectory {
+    public static void main(String[] args) {
+        HashMap<String, String> phoneBook = new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nPhone Directory Menu:");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Search Contact");
+            System.out.println("3. Delete Contact");
+            System.out.println("4. Display All Contacts");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // clear buffer
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter phone number: ");
+                    String number = scanner.nextLine();
+                    phoneBook.put(name, number);
+                    System.out.println("Contact added!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter name to search: ");
+                    name = scanner.nextLine();
+                    if (phoneBook.containsKey(name)) {
+                        System.out.println("Phone Number: " + phoneBook.get(name));
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter name to delete: ");
+                    name = scanner.nextLine();
+                    if (phoneBook.remove(name) != null) {
+                        System.out.println("Contact deleted.");
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("\nAll Contacts:");
+                    for (String contact : phoneBook.keySet()) {
+                        System.out.println(contact + ": " + phoneBook.get(contact));
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting Phone Directory.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+
+        } while (choice != 5);
+
+        scanner.close();
+    }
+}
+
+// Insertion sort (cards)
+
+public static void insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int key = arr[i];   // single card ie current element
+        int j = i - 1;      // index of last sorted ie sorted part of array
+
+// shift elements of the sorted part of array to the right
+        while (j >= 0 && arr[j] > key) {
+    // move the larger number one position to the right
+            arr[j + 1] = arr[j]; 
+            j--;
+        }
+// insert the key into the correct position
+        arr[j + 1] = key;
+    }
+}
+
+
+//Merge sort
+
+public class MergeSort {
+
+    // Main sort function
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+
+            // Divide left half
+            mergeSort(arr, left, mid);
+            // Divide right half
+            mergeSort(arr, mid + 1, right);
+
+            // Merge both halves
+            merge(arr, left, mid, right);
+        }
+    }
+
+    // Merge two sorted subarrays
+    public static void merge(int[] arr, int left, int mid, int right) {
+        // Sizes
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Temp arrays
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Copy data
+        for (int i = 0; i < n1; i++)
+            L[i] = arr[left + i];
+        for (int j = 0; j < n2; j++)
+            R[j] = arr[mid + 1 + j];
+
+        // Merge temp arrays back into original
+        int i = 0, j = 0, k = left;
+
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k++] = L[i++];
+            } else {
+                arr[k++] = R[j++];
+            }
+        }
+
+        // Copy remaining elements
+        while (i < n1) {
+            arr[k++] = L[i++];
+        }
+        while (j < n2) {
+            arr[k++] = R[j++];
+        }
+    }
+
+    // Driver
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 6, 1, 5, 3};
+        mergeSort(arr, 0, arr.length - 1);
+
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+
+//Time complexity:
+
+ What is Time Complexity?
+    Time Complexity tells us how fast or slow a program runs as input size grows.
+
+   ex:   A short list of 5 names → Easy!
+         A long list of 5 million names → Takes more time!
+
+Time complexity gives us a mathematical way to estimate that “time”.
+     
+1. O(1) – Constant Time
+
+Performs a single operation, no matter the size of input
+
+public class ConstantTime {
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40};
+        
+        // Accessing the first element - takes constant time
+        System.out.println("First element: " + arr[0]);  // O(1)
+    }
+}
+
+2. O(n) – Linear Time
+
+Scales linearly with input size.
+
+public class LinearTime {
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40};
+        
+        // Loop through each element - takes O(n) time
+        for (int num : arr) {
+            System.out.println(num);  // O(n)
+        }
+    }
+}
+
+3. O(n²) – Quadratic Time
+
+Nested loops over the same input.
+
+public class QuadraticTime {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4};
+
+        // Compare each element with every other element
+        for (int i = 0; i < arr.length; i++) {         // O(n)
+            for (int j = 0; j < arr.length; j++) {     // O(n)
+                System.out.print("(" + arr[i] + "," + arr[j] + ") ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+4. O(n³) – Cubic Time
+
+Triple nested loops.
+
+public class CubicTime {
+    public static void main(String[] args) {
+        int[] arr = {1, 2};
+
+        for (int i = 0; i < arr.length; i++) {            // O(n)
+            for (int j = 0; j < arr.length; j++) {        // O(n)
+                for (int k = 0; k < arr.length; k++) {    // O(n)
+                    System.out.print(arr[i] + arr[j] + arr[k] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}
+
+5. O(log n) – Logarithmic Time
+
+Each step cuts input size in half.
+
+public class LogarithmicTime {
+    public static void main(String[] args) {
+        int n = 16;
+
+        // Divide n by 2 until it becomes 0
+        while (n > 0) {
+            System.out.println(n);
+            n = n / 2;  // O(log n)
+        }
+    }
+}
+
+ 6. O(n log n) – Linearithmic Time
+
+Used in efficient sorting algorithms like Merge Sort.
+
+public class MergeSort {
+    public static void mergeSort(int[] arr, int l, int r) {
+        if (l < r) {
+            int m = (l + r) / 2;
+            
+            mergeSort(arr, l, m);     // Left half
+            mergeSort(arr, m + 1, r); // Right half
+            merge(arr, l, m, r);      // Merge both halves
+        }
+    }
+
+    public static void merge(int[] arr, int l, int m, int r) {
+        int[] result = new int[r - l + 1];
+        int i = l, j = m + 1, k = 0;
+
+        // Merge elements
+        while (i <= m && j <= r) {
+            if (arr[i] < arr[j]) result[k++] = arr[i++];
+            else result[k++] = arr[j++];
+        }
+
+        while (i <= m) result[k++] = arr[i++];
+        while (j <= r) result[k++] = arr[j++];
+
+        for (int x = 0; x < result.length; x++) {
+            arr[l + x] = result[x];
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {6, 3, 8, 5, 2};
+        mergeSort(arr, 0, arr.length - 1); // O(n log n)
+
+        for (int num : arr) System.out.print(num + " ");
+    }
+}
+
+7. O(2ⁿ) – Exponential Time
+
+Used in brute force problems like recursion for Fibonacci.
+
+public class ExponentialTime {
+    // O(2^n) time complexity
+    public static int fib(int n) {
+        if (n <= 1) return n;
+        return fib(n - 1) + fib(n - 2); // Two recursive calls
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        System.out.println("Fibonacci of " + n + ": " + fib(n));
+    }
+}
+
+ 8. O(n!) – Factorial Time
+
+ Used in permutation/combination-based problems (like Travelling Salesman).
+
+public class FactorialTime {
+    public static void permute(String str, String prefix) {
+        if (str.length() == 0) {
+            System.out.println(prefix);  // Print permutation
+        } else {
+            for (int i = 0; i < str.length(); i++) {
+                permute(str.substring(0, i) + str.substring(i + 1), prefix + str.charAt(i));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        permute("ABC", ""); // O(n!)
+    }
+}
+
+
+
+//Java Program for Binary Tree
+    Node is a class to represent a single element (node) in the binary tree
+    It has data to store the value.
+    left and right to point to the left and right child nodes.
+    In the constructor We initialize the node with a value.
+    Set both children (left and right) to null (empty).
+
+What is Traversal?
+It means visiting every node in the tree in a specific order.
+
+// Node class - holds value and left/right children
+class Node {
+    int data;
+    Node left, right;
+
+    // Constructor
+    public Node(int value) {
+        data = value;
+        left = right = null;
+    }
+}
+
+// BinaryTree class
+public class BinaryTree {
+    // Root of the binary tree
+    Node root;   // Starting point of the tree (topmost node)
+
+    // Pre-order traversal: Root → Left → Right
+    // 1 2 4 5 3 6
+        1*
+       / \
+     2*   3*
+    / \     \
+  4*  5*    6*
+
+    void preOrder(Node node) {
+        if (node == null)
+            return;
+
+        System.out.print(node.data + " ");  // Visit root
+        preOrder(node.left);               // Visit left subtree
+        preOrder(node.right);              // Visit right subtree
+    }
+
+    // In-order traversal: Left → Root → Right
+     4 2 5 1 3 6
+        1
+       / \
+     2    3
+    / \     \
+  4*  5*    6*
+     ↑    ↑
+     ↑    3*
+     2*
+     1*
+
+
+    void inOrder(Node node) {
+        if (node == null)
+            return;
+
+        inOrder(node.left);                // Visit left
+        System.out.print(node.data + " "); // Visit root
+        inOrder(node.right);               // Visit right
+    }
+
+    // Post-order traversal: Left → Right → Root
+    void postOrder(Node node) {
+      4 5 2 6 3 1
+
+        1*
+       / \
+     2*   3*
+    / \     \
+  4*  5*    6*
+
+
+        if (node == null)
+            return;
+
+        postOrder(node.left);              // Visit left
+        postOrder(node.right);             // Visit right
+        System.out.print(node.data + " "); // Visit root
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        // Let's manually build the tree:
+        //         1
+        //       /   \
+        //      2     3
+        //     / \     \
+        //    4   5     6
+
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+        tree.root.right.right = new Node(6);
+
+        System.out.print("Pre-order: ");
+        tree.preOrder(tree.root);  // Output: 1 2 4 5 3 6
+
+        System.out.print("\nIn-order: ");
+        tree.inOrder(tree.root);   // Output: 4 2 5 1 3 6
+
+        System.out.print("\nPost-order: ");
+        tree.postOrder(tree.root); // Output: 4 5 2 6 3 1
+    }
+}
+
+// Binary Search Tree (BST) 
+
+A BST is a type of binary tree with a special rule:
+It automatically arranges data for fast searching, insertion, and deletion.
+   
+     For every node:
+        - Left child < Node
+        - Right child > Node
+
+EX:
+         50
+        /  \
+      30    70
+     / \    / \
+   20  40  60  80
+
+
+Step 1: Insert 50 (BST is empty → make 50 the root) 
+
+[50]
+
+Step 2: Insert 30 (30 < 50 → go left of 50.)
+
+     50
+    /
+  30
+
+Step 3: Insert 70 (70 > 50 → go right of 50.)
+
+     50
+    /  \
+  30    70
+
+Step 4: Insert 20 (20 < 50 → go left
+20 < 30 → go left of 30.)
+
+     50
+    /  \
+  30    70
+ /
+20
+
+Step 5: Insert 40 (40 < 50 → left
+40 > 30 → right of 30.)
+
+
+     50
+    /  \
+  30    70
+ /  \
+20  40
+
+Step 6: Insert 60 (60 > 50 → right
+60 < 70 → left of 70.)
+
+     50
+    /  \
+  30    70
+ /  \   /
+20  40 60
+
+Step 7: Insert 80 (80 > 50 → right
+80 > 70 → right of 70.)
+
+     50
+    /  \
+  30    70
+ /  \   / \
+20  40 60  80
+
+
+// Define the structure of a node in the BST
+class Node {
+    int data;         // value of the node
+    Node left, right; // left and right child
+
+    public Node(int value) {
+        data = value;
+        left = right = null;
+    }
+}
+
+// BST class containing root node and operations
+public class BinarySearchTree {
+    Node root;  // root of the BST
+
+    // Method to insert a new node into the BST
+    public Node insert(Node root, int value) {
+        // If the tree/subtree is empty, create a new node
+        if (root == null) {
+            return new Node(value);
+        }
+
+        // If value is less than root, insert into left subtree
+        if (value < root.data) {
+            root.left = insert(root.left, value);
+        }
+        // If value is greater than root, insert into right subtree
+        else if (value > root.data) {
+            root.right = insert(root.right, value);
+        }
+
+        // Return the unchanged node pointer
+        return root;
+    }
+
+    // Method to do inorder traversal (Left, Root, Right)
+    public void inorder(Node root) {
+        if (root != null) {
+            inorder(root.left);            // Traverse left subtree
+            System.out.print(root.data + " "); // Visit root
+            inorder(root.right);           // Traverse right subtree
+        }
+    }
+
+    // Main method to test the BST
+    public static void main(String[] args) {
+        BinarySearchTree bst = new BinarySearchTree();
+
+        // Inserting elements: 50, 30, 70, 20, 40, 60, 80
+        bst.root = bst.insert(bst.root, 50);  // Root node
+        bst.insert(bst.root, 30); // Goes left of 50
+        bst.insert(bst.root, 70); // Goes right of 50
+        bst.insert(bst.root, 20); // Goes left of 30
+        bst.insert(bst.root, 40); // Goes right of 30
+        bst.insert(bst.root, 60); // Goes left of 70
+        bst.insert(bst.root, 80); // Goes right of 70
+
+        // Print the BST in inorder (should be sorted)
+        System.out.print("Inorder traversal of BST: ");
+        bst.inorder(bst.root); // Output: 20 30 40 50 60 70 80
+    }
+}
+
+
+
+
+

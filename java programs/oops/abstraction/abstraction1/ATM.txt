@@ -1,0 +1,28 @@
+abstract class ATM {
+  abstract void validateUser();
+  abstract void withdraw();
+
+  void printReceipt() {
+    System.out.println("Reciept printed successfully.");
+  }
+}
+
+
+class SBIATM extends ATM {
+   void validateUser() {
+     System.out.println("SBI: User validated via OTP.");
+   }
+
+   void withdraw() {
+     System.out.println("SBI: 5000 withdrawn");
+   }
+}
+
+public class ATMDemo {
+  public static void main(String[] args) {
+    ATM atm = new SBIATM();
+    atm.validateUser();
+    atm.withdraw(); 
+    atm.printReciept();
+}
+}

@@ -1,0 +1,137 @@
+class Car {
+  string color;
+  int speed;
+
+void start() {
+  System.out.println("Car is starting...");
+}
+
+void display() {
+  System.out.println("Color " + color + "Speed " + speed + " km/hr");
+}
+}
+
+
+public class myCar {
+  public static void main(String[] args) {
+     Car myCar = new Car();
+     myCar.color = "red";
+     myCar.speed = 120;
+     myCar.start();
+     myCar.display()
+}
+}
+
+
+class Student {
+  String name;
+
+  Student() {
+    name = "Default name";
+  }
+
+  void display() {
+    System.out.println("Name: " + name);
+  }
+}
+
+public class DefaultDemo {
+  public static void main(String[] args) {
+    Student s = new Student();
+    s.display();
+}
+}
+
+
+class Student {
+   String name;
+   int age;
+
+   Student(String n , int a) {
+     name = n;
+     age = a;
+   }
+
+   void display() {
+    System.out.println("Name :" + name + "Age :" + age);
+   }
+}
+
+public class ParamDemo {
+  public static void main(String[] args) {
+     Student s = new Student("vimal" , 23);
+     s.display();
+}
+}
+
+
+class Book {
+ String title;
+
+ Book(String title) {
+   this.title = title
+ }
+
+ void display() {
+   System.out.println("Title: " + this.title);
+ }
+}
+
+
+public class ThisDemo {
+  public static void main(String[] args) {
+     Book b = new Book("java basics");
+     b.display();
+}
+}
+
+
+class Animal {
+  String type = "Animal";
+
+  Animal() {
+    System.out.println("Animal constructor called...");
+  }
+}
+
+class Dog extends Animal {
+  Dog() {
+    super();
+    System.out.println("Dog constructor called...");
+  }
+}
+
+public class SuperDemo {
+  public static void main(String[] args) {
+    Dog d = new Dog();
+}
+}
+
+
+class Employee {
+  String name;
+  int id;
+
+ Employee() {
+   name = "unknown";
+   id = 0;
+ }
+
+ Employee(String n , int i) {
+   name = n;
+   id = i;
+ } 
+
+ void show() {
+   System.out.println("Name: " + name + " ID: " + id);
+ }
+}
+
+public class ConstructorOverloadDemo {
+  public static void main(String[] args) {
+    Employee e1 = new Employee();
+    Employee e2 = new Employee("Vimal" , 101);
+    e1.show();
+    e2.show();
+}
+}

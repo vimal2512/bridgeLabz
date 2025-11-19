@@ -1,0 +1,32 @@
+interface Printable {
+  void print();
+}
+
+
+interface Showable {
+   void show();
+}
+
+class Report implements Printable,Showable {
+   public void print() {
+      System.out.println("Report printed");
+   }
+
+   public void show() {
+     System.out.println("Report displayed");
+   }
+}
+
+public class MultipleInterfaceDemo {
+  public static void main(String[] args) {
+    Report r = new Report();
+    r.print();
+    r.show();
+}
+}
+
+
+Output:
+
+Report printed  
+Report displayed

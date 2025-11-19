@@ -1,0 +1,22 @@
+class Teacher {
+    String name;
+}
+
+class Student {
+    String name;
+    
+    // Association: Student has a reference to Teacher
+    Teacher teacher;
+}
+
+
+// Just a connection between two classes"
+// Key Point: No ownership — just a reference.
+// Real-life:
+// A Teacher teaches Students
+// A Doctor treats Patients
+// But both can exist independently
+
+
+Association is a general "uses-a" relationship between two classes. One class uses another class.
+It doesn’t imply ownership — both classes can exist independently.

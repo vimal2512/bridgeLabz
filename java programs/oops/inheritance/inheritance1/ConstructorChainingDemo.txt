@@ -1,0 +1,33 @@
+class Animal {
+    Animal() {
+        System.out.println("Animal default constructor");
+    }
+
+    Animal(String name) {
+        System.out.println("Animal named: " + name);
+    }
+}
+
+class Dog extends Animal {
+    Dog() {
+        this("Tommy");
+        System.out.println("Dog default constructor");
+    }
+
+    Dog(String name) {
+        super(name); // calls parent constructor
+        System.out.println("Dog named: " + name);
+    }
+}
+
+public class ConstructorChainingDemo {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+    }
+}
+
+Output:
+
+Animal named: Tommy
+Dog named: Tommy
+Dog default constructor

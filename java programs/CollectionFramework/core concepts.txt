@@ -1,0 +1,75 @@
+1.Collection Hierarchy
+  =>Interfaces
+     -Collection
+         .List
+         .Set
+         .Queue
+
+     -Map(not a part of collection interface directly)
+
+2. Important Interfaces & Subinterfaces
+    
+    Collection<E>   - Root interface for most collections
+    List<E>         - Ordered collection, allows duplicates
+    Set<E>          - No duplicate elements
+    SortedSet<E>    - Sorted version of Set
+    NavigableSet<E> - Extended SortedSet with navigation
+    Queue<E>        - FIFO behavior
+    Deque<E>        - Double-ended queue
+    Map<K, V>       - Key-value pairs
+    SortedMap<K, V> - Keys in sorted order
+    NavigableMap<K, V> - Key-based navigation
+
+3. Important Classes
+
+   Interface       Implementing Classes
+   List  -          ArrayList, LinkedList, Vector, Stack
+   Set   -          HashSet, LinkedHashSet, TreeSet
+   Queue -          PriorityQueue, ArrayDeque
+   Map   -          HashMap, LinkedHashMap, TreeMap, Hashtable, ConcurrentHashMap
+
+4. Traversal Techniques
+    
+   For-each loop
+   Iterator
+   ListIterator
+   Enumeration (legacy)
+   Streams API (Java 8+)
+
+5. Key Algorithms & Utility Methods
+
+   Provided by Collections and Arrays class:
+     - Collections.sort(), shuffle(), reverse(), binarySearch()
+     - Arrays.asList(), sort(), copyOf()
+
+6. Comparator and Comparable
+
+   Comparable: Natural ordering via compareTo()
+   Comparator: Custom sorting using compare()
+
+ 7. Fail-fast vs Fail-safe Iterators
+
+    Fail-fast: Throws ConcurrentModificationException (ArrayList, HashMap)
+    Fail-safe: Works on a copy (ConcurrentHashMap, CopyOnWriteArrayList)
+ 
+ 8. Thread-safe vs Non-thread-safe Collections
+  
+     Thread-safe - Vector, Stack, Hashtable, Collections.synchronizedList()
+     Non-thread-safe - ArrayList, HashMap, HashSet
+
+     Use Concurrent Collections for multithreading:
+       - ConcurrentHashMap
+       - CopyOnWriteArrayList
+
+ 9. Generics in Collections
+  
+     Example: List<String> list = new ArrayList<>();
+     Avoids ClassCastException, ensures type safety.
+
+10. Streams API (Java 8+)
+   
+     Functional-style operations on collections:
+     
+     list.stream().filter(x -> x > 10).collect(Collectors.toList());
+
+   

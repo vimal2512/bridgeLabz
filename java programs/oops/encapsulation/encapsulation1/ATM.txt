@@ -1,0 +1,24 @@
+class ATM {
+    private int pin = 1234;
+
+    public boolean validatePIN(int enteredPIN) {
+        return this.pin == enteredPIN;
+    }
+
+    public void changePIN(int oldPIN, int newPIN) {
+        if (validatePIN(oldPIN)) {
+            pin = newPIN;
+            System.out.println("PIN successfully updated!");
+        } else {
+            System.out.println("Incorrect old PIN!");
+        }
+    }
+}
+
+public class ATMDemo {
+    public static void main(String[] args) {
+        ATM myATM = new ATM();
+        myATM.changePIN(1111, 4321); // wrong pin
+        myATM.changePIN(1234, 4321); // correct pin
+    }
+}

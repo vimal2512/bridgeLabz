@@ -1,0 +1,336 @@
+//single inheritance
+
+class Animal {
+ void eat() {
+   System.out.println("Animal is eating...");
+  }
+}
+
+class Dog extends Animal {
+  void bark() {
+    System.out.println("Dog is barking...");
+  }
+}
+
+public class SingleInheritanceDemo {
+  public static void main(String args) {
+     Dog dog = new Dog();
+     dog.eat();
+     dog.bark();
+  }
+}
+
+
+//multilevel inheritance
+
+class Animal {
+  void eat() {
+    System.out.println("Eating...");
+  }
+}
+
+class Dog extends Animal {
+   void bark() {
+    System.out.println("Barking...");
+  }
+}
+
+class Puppy extends Dog {
+   void weep() {
+    System.out.println("weeping...");
+   }
+}
+
+
+public class MultilevelInheritanceDemo  {
+  public static void main(String[] args) {
+        Puppy p = new Puppy();
+        p.eat();
+        p.bark();
+        p.weep();
+   }
+ }
+
+//Hierarchical inheritance
+
+
+class Animal {
+  void eat(){
+    System.out.println("Animal is eating...");
+  }
+}
+
+class Dog extends Animal {
+   void bark() {
+     System.out.println("Dog is barking...");
+   }
+}
+
+class Cat extends Animal {
+    void meow() {
+      System.out.println("Cat is meowing...");
+    }
+}
+
+public class HierarchicalInheritanceDemo {
+  public static void main(String[] args) {
+    Dog d = new Dog();
+    d.eat();
+    d.bark();
+
+    Cat c = new Cat();
+    c.eat();
+    c.bark();
+  }
+}
+
+//multiple inheritance;
+
+interface Printable {
+  void print();
+}
+
+interface Showable {
+  void show();
+}
+
+class Document implements Printable,Showable {
+  public void print(){
+    System.out.printlb("Printing document");
+  }
+
+  public void show() {
+    System.out.println("Showing document");
+ }
+}
+
+public class MultipleInheritanceDemo {
+ public static void main(String[] args) {
+     Document doc = new Document();
+     doc.print();
+     doc.show();
+  }
+}
+
+//Simple overloading
+
+public class Calculator {
+  void add() {
+    System.out.println("Nothing to add");
+  }
+
+  void add(int a, int b){
+     System.out.println("Sum(int) :" + (a+b));
+   }
+
+   void add(double a, double b) {
+     System.out.println("Sum(double) :" + (a+b));
+  }
+
+  void add(int a, int b, int c){
+    System.out.println("Sum(3 ints): " + (a+b+c));
+  }
+
+ public static void main(String[] args) {
+    Calculator calc = new Calculator();
+    calc.add();
+    calc.add(5.5,4.5);
+    calc.add(10,20);
+    calc.add(1,2,3);
+ }
+}
+
+
+//Overloading by changing order of parameters
+
+public class OverloadOrder {
+   void display(String name, int age) {
+     System.out.println("Name: " + name + "Age: " + age);
+  }
+
+  void display(int age,String name) {
+    System.out.println("Age: " + age + " Name: " + name);
+  }
+
+  public static void main(String[] args){
+     Overloader obj = new Overloader();
+     obj.display("Vimal" , 25);
+     obj.display(28,"vimal");
+  }
+}
+
+
+//overloading type promotion
+
+public class TypePromotion {
+  void show(int a, long b) {
+    System.out.println("int and long called");
+  }
+
+  public static void main(String[] args) {
+     TypePromotion t = new TypePromotion();
+     t.show(10,20);
+  }
+}
+
+
+//overloading ex
+
+public class Login {
+
+    void login(String username, String password) {
+        System.out.println("Logged in with username and password");
+    }
+
+    void login(String email) {
+        System.out.println("Logged in with email link");
+    }
+
+    void login(long phoneNumber) {
+        System.out.println("Logged in with OTP to phone");
+    }
+
+    public static void main(String[] args) {
+        Login l = new Login();
+        l.login("user123", "pass123");
+        l.login("user@example.com");
+        l.login(9876543210L);
+    }
+}
+
+
+//over riding
+
+class Animal {
+  void sound() {
+    System.out.println("Animal makes sound");
+  }
+}
+
+
+class Dog extends Animal {
+  @override
+  void sound() {
+    System.out.println("Dog barks");
+  }
+}
+
+public class OverrideDemo {
+  public static void main(String[] args) {
+    Animal a = new Dog();  // upcasting
+    a.sound();    // dynamic method dispatch
+
+ }
+}
+
+//down casting
+
+class Animal {
+  void sound() {
+    System.out.println("Animal makes sound");
+  }
+}
+
+class Dog extends Animal {
+   void bark() {
+     System.out.println("Dog barks");
+   }
+}
+
+public class DowncastingDemo {
+  public static void main(String[] args) {
+     Animal a = new Dog();
+     Dog d = (Dog) a;
+     d.bark();
+ }
+}
+
+//Access Modifiers
+
+class Animal {
+  public void run(){
+    System.out.println("Public: Running...");
+  }
+
+  protected void sleep() {
+    System.out.println("Protected: Sleeping...");
+  }
+
+  void eat() {
+    System.out.println("Default: Eating...");
+  }
+
+  private void breathe() {
+    System.out.println("Private: Breathing...");
+  }
+
+ public void callPrivate() {
+    breathe();
+  }
+}
+
+class Dog extends Animal {
+  void show() {
+    run();   // ✅ public
+    sleep();  // ✅ protected
+    eat();    // ✅ default (same package)
+    //breathe   ❌ Error – private not inherited
+  }
+}
+
+public class AccessModifierDemo {
+  public static void main(String[] args){
+     Dog d = new Dog();
+     d.run();
+     d.sleep();
+     d.eat();
+     d.callPrivate();  // access private indirectly
+  }
+}
+
+class Animal {
+  Animal() {
+    System.out.println("Animal constructor called");
+  }
+}
+
+class Dog extends Animal {
+   Dog() {
+    super();
+    System.out.println("Dog constructor called");
+  }
+}
+
+
+public class SuperConstructorDemo {
+  public static void main(String[] args) {
+    Dog d = new Dog();
+}
+}
+
+class Animal {
+   final int MAX_AGE = 15;
+   
+   void display(){
+     // MAX_AGE = 20;  ❌ not allowed
+     System.out.println("Max age: " + MAX_AGE);
+   }
+}
+
+class Animal {
+  final void sound() {
+    System.out.println("Animal sound");
+  }
+}
+
+class Dog extends Animal {
+  // void sound() {}  ❌ Not allowed – can't override final method
+} 
+
+final class Animal {
+  void sound() {
+    System.out.println("Animal sound");
+}
+}
+
+// class Dog extends Animal {} ❌ Cannot inherit from final class

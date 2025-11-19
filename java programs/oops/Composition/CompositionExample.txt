@@ -1,0 +1,43 @@
+// Author class
+class Author {
+    String name;
+
+    Author(String name) {
+        this.name = name;
+    }
+
+    void displayAuthor() {
+        System.out.println("Author: " + name);
+    }
+}
+
+// Book class (has an Author)
+class Book {
+    String title;
+    Author author; // Composition: Book has an Author
+
+    Book(String title, Author author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    void displayBook() {
+        System.out.println("Book: " + title);
+        author.displayAuthor(); // Using Author object
+    }
+}
+
+// Main class
+public class CompositionSimpleExample {
+    public static void main(String[] args) {
+        Author a1 = new Author("J.K. Rowling");
+        Book b1 = new Book("Harry Potter", a1);
+
+        b1.displayBook();
+    }
+}
+
+Output:
+
+Book: Harry Potter
+Author: J.K. Rowling

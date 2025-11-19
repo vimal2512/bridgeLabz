@@ -1,0 +1,208 @@
+1. Basic Queue using LinkedList
+
+import java.util.*;
+
+public class BasicQueue {
+  public static void main(String[] args) {
+    Queue<String> queue = new LinkedList<>();
+  
+    queue.offer("A");
+    queue.offer("B");
+    queue.offer("C");
+
+     System.out.println("Queue: " + queue);
+  }
+}
+
+output:
+
+Queue: [A, B, C]
+
+2. Queue traversal and peek
+
+import java.util.*;
+
+public class QueueTraversal {
+    public static void main(String[] args) {
+       Queue<Integer> queue = new LinkedList<>();
+       queue.offer(1);
+       queue.offer(2);
+       queue.offer(3);
+      
+       System.out.println("Peek: " + queue.peek());
+
+       System.out.println("Traversal:");
+       for(int value : queue) {
+         System.out.println(value);
+       }
+  }
+}
+
+output:
+
+Peek: 1
+Traversal:
+1
+2
+3
+
+
+3. PriorityQueue with custom comparator
+
+import java.util.*;
+
+class Job {
+  String name;
+  int priority;
+
+  Job(String name, int priority) {
+    this.name = name;
+    this.priority = priority;
+  }
+
+  public String toString() {
+     return name + " (Priority: " + priority + ")";
+  }
+}
+
+public class CustomPriotrityQueue {
+   public static void main(String[] args) {
+      PriorityQueue<Job> jobQueue = new PriorityQueue<>((a,b) -> b.priority - a.priority);
+
+     jobQueue.offer(new Job("Job1", 2));
+     jobQueue.offer(new Job("Job2",5));
+     jobQueue.offer(new Job("Job 3",1));
+
+     while(!jobQueue.isEmpty()) {
+        System.out.println(jobQueue.poll());
+     }
+  }
+}
+
+output:
+
+Job2 (Priority: 5)
+Job1 (Priority: 2)
+Job 3 (Priority: 1)
+
+// 4. Remove duplicates using Queue
+
+import java.util.*;
+
+public class RemoveDuplicatsQueue {
+  public static void main(String[] args) {
+     Queue<String> queue = new LinkedList<>();
+     queue.offer("A");
+     queue.offer("B");
+     queue.offer("A");
+     queue.offer("C");
+     queue.offer("B");
+
+     Set<String> seen = new HashSet<>();
+     Queue<String> result = new LinkedList<>();
+
+     for(String item : queue) {
+       if(seen.add(item)) { // add this item to hashset
+          result.offer(item);
+       }
+     }
+    System.out.println("Queue without duplicates: " + result);
+  }
+}
+
+Example:
+  queue = [A, B, A, C]
+
+// 5. Reverse a Queue
+
+import java.util.*;
+
+public class ReverseQueue {
+ public static void main(String[] args) {
+   Queue<Integer> queue = new LinkedList<>();
+   queue.offer(1);
+   queue.offer(2);
+   queue.offer(3);
+
+   Stack<Integer> stack = new Stack<>();
+   
+   // You transfer all elements from the queue to the stack
+    while(!queue.isEmpty()) {
+      stack.push(queue.poll());
+    }
+
+   // You transfer elements back to the queue from the stack
+    while(!stack.isEmpty()) {
+       queue.offer(stack.pop());
+    }
+System.out.println("Reversed Queue: " + queue);
+  }
+}
+
+output:
+Reversed Queue: [3, 2, 1]
+
+
+// 6. ArrayDeque as Queue
+
+import java.util.*;
+
+public class ArrayDequeQueue {
+    public static void main(String[] args) {
+        Queue<String> deque = new ArrayDeque<>();
+
+        deque.offer("Java");
+        deque.offer("Python");
+        deque.offer("C++");
+
+        System.out.println("Deque as Queue: " + deque);
+        System.out.println("Peek: " + deque.peek());
+        deque.poll();
+        System.out.println("After poll: " + deque);
+    }
+}
+
+
+ Output:
+
+Deque as Queue: [Java, Python, C++]
+Peek: Java
+After poll: [Python, C++]
+
+ // 7. Queue in real-life scenario (Print job scheduling)
+
+ import java.util.*;
+
+class PrintJob {
+    String document;
+
+    PrintJob(String document) {
+        this.document = document;
+    }
+
+    public String toString() {
+        return document;
+    }
+}
+
+public class PrintJobQueue {
+    public static void main(String[] args) {
+        Queue<PrintJob> printQueue = new LinkedList<>();
+
+        printQueue.offer(new PrintJob("Resume.pdf"));
+        printQueue.offer(new PrintJob("Report.docx"));
+        printQueue.offer(new PrintJob("Invoice.xlsx"));
+
+        while (!printQueue.isEmpty()) {
+            PrintJob job = printQueue.poll();
+            System.out.println("Printing: " + job);
+        }
+    }
+}
+
+Output:
+
+Printing: Resume.pdf
+Printing: Report.docx
+Printing: Invoice.xlsx
+

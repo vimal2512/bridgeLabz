@@ -1,0 +1,997 @@
+// node the basic building block of linked list
+// each node contains data and next => a reference to the next node in the list
+
+
+1.single linked list
+//visualization [10]->[20]->[30]->null
+//arrow represent pointer
+//Each node points to the next node only. Last node points to null.
+
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class SinglyLinkedList {
+    public static void main(String[] args) {
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+
+        Node temp = head;        //Start at first node
+        while (temp != null) {
+            System.out.print(temp.data + " ");   // Print current node's 
+            temp = temp.next;                    // Move to the next node
+        }
+    }
+}
+
+ Output:
+  10 20 30
+
+2.doubly linked list
+//  null ← [10] ⇄ [20] ⇄ [30] → null
+// Each node has two pointers: one to the next node and one to the previous node.
+
+class Node {
+   int data;
+   Node prev;
+   Node next;
+   Node(int data) {
+     this.data = data
+   }
+}
+
+public class DoublyLinkedList {
+   public static void main(String[] args) {
+      Node head = new Node(10);
+      Node second = new Node(20);
+      Node third = new Node(30);
+
+     head.next = second;
+     second.prev = head;
+     second.next = third;
+     third.prev = second;
+
+     Node temp = head;
+     while(temp != null) {
+        System.out.print(temp.data + " ");
+        temp = temp.next;
+     }
+  }
+}
+
+Output:
+ 10 20 30
+
+
+3. Circular Linked List(Singly circular);
+// The last node points back to the first node, forming a circle. Can be singly or doubly circular.
+//visualization 
+  
++------+    +------+    +------+
+|  10  | -> |  20  | -> |  30  |
++------+    +------+    +------+
+     ^                        |
+     |------------------------|
+
+
+
+class Node {
+   int data;
+   Node next;
+   Node(int data){
+      this.data = data;
+   }
+}
+
+public class CircularLinkedList {
+   public static void main(String[] args) {
+       Node head = new Node(10);
+       Node second = new Node(20);
+       Node third = new Node(30);
+
+       head.next = second;
+       second.next = third;
+       third.next = head;   //circular link
+
+      Node temp = head;
+      do {
+        System.out.println(temp.data + " ");
+        temp = temp.next;
+     }while(temp != head);
+  }
+}
+
+
+4.CircularLinkedList (doubly circular)
+
+//Each node has a data, next and prev pointer.
+
+//The next of the last node points to the first node.
+
+//The prev of the first node points to the last node.
+
+//visualization 
+
+[10] ⇄     [20]      ⇄     [30]
+ ↑                   ↓
+ └────── ⇇ ⇉ ───────┘
+
+class Node {
+    int data;
+    Node next, prev;
+
+    Node(int data) {
+        this.data = data;
+        this.next = this.prev = null;
+    }
+}
+
+public class DoublyCircularLinkedList {
+    Node head = null;
+
+    // Insert at end
+    public void insert(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+            head.next = head;
+            head.prev = head;
+            return;
+        }
+
+        Node last = head.prev;
+
+        last.next = newNode;
+        newNode.prev = last;
+        newNode.next = head;
+        head.prev = newNode;
+    }
+
+    // Traverse forward
+    public void displayForward() {
+        if (head == null) return;
+
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println();
+    }
+
+    // Traverse backward
+    public void displayBackward() {
+        if (head == null) return;
+
+        Node last = head.prev;
+        Node temp = last;
+
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.prev;
+        } while (temp != last);
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        DoublyCircularLinkedList list = new DoublyCircularLinkedList();
+        list.insert(10);
+        list.insert(20);
+        list.insert(30);
+
+        System.out.print("Forward: ");
+        list.displayForward();   // Output: 10 20 30
+
+        System.out.print("Backward: ");
+        list.displayBackward();  // Output: 30 20 10
+    }
+}
+
+
+//Employee management using linked list
+
+class Employee {
+  int id; 
+  String name;
+  double salary;
+  Employee next;
+
+  Employee(int id, String name, double Salary) {
+      this.id = id;
+      this.name = name;
+      this.salary = salary;
+      this.next = null;
+   }
+}
+
+public class EmployeeManagement {
+   Employee head = null;
+    
+   //Add new employee
+
+    public void addEmployee(int id, String name, double salary) {
+       Employee newEmp = new Employee(id,name,salary);
+       if(head == null) {
+           head = newEmp;
+        }else {
+           Employee temp = head;
+           while(temp.next != null) {
+              temp = temp.next;
+           }
+            temp.next = newEmp;
+      }
+  
+     System.out.println("Employee added: " + name);
+
+     //Display all employee records
+
+      public void displayEmployees() {
+         if(head == null) {
+            System.out.println("No records to display");
+            return;
+         }
+          System.out.println("\n Employee Records:");
+          Employee temp = head;
+      }
+    }
+}
+
+
+// Employee Management Using Linked List
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+    Employee next;
+
+    Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.next = null;
+    }
+}
+
+public class EmployeeManagement {
+    Employee head = null;
+
+    // Add new employee
+    public void addEmployee(int id, String name, double salary) {
+        Employee newEmp = new Employee(id, name, salary);
+        if (head == null) {
+            head = newEmp;
+        } else {
+            Employee temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newEmp;
+        }
+        System.out.println("✅ Employee Added: " + name);
+    }
+
+    // Display all employee records
+    public void displayEmployees() {
+        if (head == null) {
+            System.out.println("No records to display.");
+            return;
+        }
+        System.out.println("\n📋 Employee Records:");
+        Employee temp = head;
+        while (temp != null) {
+            System.out.println("ID: " + temp.id + ", Name: " + temp.name + ", Salary: " + temp.salary);
+            temp = temp.next;
+        }
+    }
+
+    // Delete employee by ID
+    public void deleteEmployee(int id) {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (head.id == id) {
+            head = head.next;
+            System.out.println("🗑️ Employee with ID " + id + " deleted.");
+            return;
+        }
+
+        Employee temp = head;
+        while (temp.next != null && temp.next.id != id) {
+            temp = temp.next;
+        }
+
+        if (temp.next == null) {
+            System.out.println("❌ Employee not found.");
+        } else {
+            temp.next = temp.next.next;
+            System.out.println("🗑️ Employee with ID " + id + " deleted.");
+        }
+    }
+
+    // Search employee by ID
+    public void searchEmployee(int id) {
+        Employee temp = head;
+        while (temp != null) {
+            if (temp.id == id) {
+                System.out.println("🔍 Employee Found: ID: " + temp.id + ", Name: " + temp.name + ", Salary: " + temp.salary);
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("❌ Employee with ID " + id + " not found.");
+    }
+
+    // Main method to test
+    public static void main(String[] args) {
+        EmployeeManagement em = new EmployeeManagement();
+
+        em.addEmployee(101, "Alice", 50000);
+        em.addEmployee(102, "Bob", 55000);
+        em.addEmployee(103, "Charlie", 60000);
+
+        em.displayEmployees();
+
+        em.searchEmployee(102);
+        em.deleteEmployee(102);
+
+        em.displayEmployees();
+    }
+}
+
+
+ Output:
+
+✅ Employee Added: Alice
+✅ Employee Added: Bob
+✅ Employee Added: Charlie
+
+📋 Employee Records:
+ID: 101, Name: Alice, Salary: 50000.0
+ID: 102, Name: Bob, Salary: 55000.0
+ID: 103, Name: Charlie, Salary: 60000.0
+
+🔍 Employee Found: ID: 102, Name: Bob, Salary: 55000.0
+🗑️ Employee with ID 102 deleted.
+
+📋 Employee Records:
+ID: 101, Name: Alice, Salary: 50000.0
+ID: 103, Name: Charlie, Salary: 60000.0
+
+//Playlist Management Using Circular Linked List
+
+
+class Song {
+  String title;
+  Song next;
+  Song prev;
+
+  Song(String title) {
+     this.title = title;
+     this.next = next;
+     this.prev = null;
+  }
+}
+
+public class Playlist {
+  private Song head = null;
+  private Song current = null;
+
+  //Add song to playlist
+  public void addSong(String title) {
+    Song newSong = new Song(title);
+
+    if(head == null) {
+       head = newSong;
+       head.next = head;
+       head.prev = head;
+       current = head;
+     }else {
+       Song last = head.prev;
+       
+       last.next = newSong;
+       newSong.prev = last;
+       newSong.next = head;
+       head.prev = newSong;
+     }
+  }
+
+  //Show current song
+  public void showCurrent() {
+     if(current != null) {
+        System.out.println("Currently Playing: " + current.title);
+     }else {
+        System.out.println("Playlist is empty.");
+     }
+  }
+
+  //play next song
+  public void nextSong() {
+    if(current != null) {
+       current = current.next;
+       showCurrent();
+    }
+  }
+
+  //play previous song
+  public void previousSong() {
+    if(current != null) {
+      current = current.prev;
+      showCurrent();
+    }
+  }
+
+   //Display entire playlist once
+   public void showPlaylist() {
+     if(head == null) {
+        System.out.println("Playlist is empty");
+        return;
+      }
+     System.out.println("playlist:");
+     Song temp = head;
+     do {
+        System.out.println("- " + temp.title);
+        temp = temp.next;
+     }while(temp != head);
+   }
+   
+   public static void main(String[] args) {
+      Playlist playlist = new Playlist();
+
+      playlist.addSong("Shape of you");
+      playlist.addSong("Blinding Lights");
+      playlist.addSong("Levitating");
+      playlist.addSong("Closer");
+
+      playlist.showPlaylist();
+      playlist.showCurrent();
+
+      playlist.nextSong();
+      playlist.nextSong();
+      playlist.previousSong();
+      playlist.nextSong();
+      playlist.nextSong(); // Loops to first song again
+   }
+}
+
+//Stack
+// LIFO – Last In, First Out
+
+class Stack {
+    int maxSize = 5;
+    int[ ] stack = new int[maxSize];
+    int top = -1;    // Starts at -1 to indicate: Stack is empty.
+                                  // Every time you push a number, top increases by 1.
+              // Every time you pop a number, top decreases by 1.
+
+    void push(int data) {
+        if (top == maxSize - 1) {
+            System.out.println("Stack Overflow");
+        } else {
+            stack[++top] = data;
+        }
+    }
+
+    void pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow");
+        } else {
+            System.out.println("Popped: " + stack[top--]);
+        }
+    }
+
+    void peek() {
+// to see the top element without removing it.
+        if (top != -1)
+            System.out.println("Top element: " + stack[top]);
+        else
+            System.out.println("Stack is empty");
+    }
+
+
+    void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            for (int i = top; i >= 0; i--) {
+                System.out.print(stack[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Output Example:
+
+Stack s = new Stack();
+s.push(10); // [10]
+s.push(20); // [10, 20]
+s.push(30); // [10, 20, 30]
+s.display(); // 30 20 10
+s.pop();     // removes 30
+s.peek();    // shows 20
+
+//Queue
+//First In First Out
+
+explain class Queue {
+    int front = 0;
+    int rear = -1;
+    int maxSize = 5;
+    int[] queue = new int[maxSize];
+
+    void enqueue(int data) {
+        if (rear == maxSize - 1) {
+            System.out.println("Queue Overflow");
+        } else {
+            queue[++rear] = data;
+        }
+    }
+
+    void dequeue() {
+        if (front > rear) {
+            System.out.println("Queue Underflow");
+        } else {
+            System.out.println("Dequeued: " + queue[front++]);
+        }
+    }
+
+    void display() {
+        if (front > rear) {
+            System.out.println("Queue is empty");
+        } else {
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+// BalancedParenthesesChecker
+
+import java.util.Stack;
+
+public class BalancedParenthesesChecker {
+
+    public static boolean isBalanced(String expr) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : expr.toCharArray()) {
+            // If opening bracket, push to stack
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            }
+            // If closing bracket
+            else if (ch == ')' || ch == '}' || ch == ']') {
+                // If stack is empty or top doesn't match
+                if (stack.isEmpty()) return false;
+
+                char top = stack.pop();
+                if ((ch == ')' && top != '(') ||
+                    (ch == '}' && top != '{') ||
+                    (ch == ']' && top != '[')) {
+                    return false;
+                }
+            }
+        }
+
+        // If stack is empty → all matched
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        String input = "{[()]}";
+        if (isBalanced(input)) {
+            System.out.println("Balanced");
+        } else {
+            System.out.println("Not Balanced");
+        }
+    }
+}
+
+//ticket counter management using queues
+
+class TicketCounter {
+    int front = 0;
+    int rear = -1;
+    int maxSize = 5;
+    String[] queue = new String[maxSize];
+
+    // Person joins the queue
+    void enqueue(String name) {
+        if (rear == maxSize - 1) {
+            System.out.println("Line is full. " + name + " can't join.");
+        } else {
+            queue[++rear] = name;
+            System.out.println(name + " joined the line.");
+        }
+    }
+
+    // Person gets the ticket and leaves
+    void dequeue() {
+        if (front > rear) {
+            System.out.println("No one in line.");
+        } else {
+            System.out.println(queue[front++] + " got the ticket and left.");
+        }
+    }
+
+    // Show who's in line
+    void display() {
+        if (front > rear) {
+            System.out.println("No one in line.");
+        } else {
+            System.out.print("Current line: ");
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+//  Browser Back/Forward Navigation Using
+ Stacks.
+
+
+import java.util.Stack;
+
+public class BrowserNavigation {
+
+    Stack<String> backStack = new Stack<>();    // Stack to store backward history
+    Stack<String> forwardStack = new Stack<>(); // Stack to store forward history
+    String currentPage = "Home";                // Start from Home page
+
+    // Function to visit a new webpage
+    public void visit(String url) {
+        // Push the current page into backStack
+        backStack.push(currentPage);
+
+        // Clear forwardStack (you can't go forward after visiting new page)
+        forwardStack.clear();
+
+        // Update the current page
+        currentPage = url;
+
+        System.out.println("Visited: " + currentPage);
+    }
+
+    // Function to go back
+    public void back() {
+        // Check if there is a page to go back to
+        if (backStack.isEmpty()) {
+            System.out.println("No page to go back to.");
+            return;
+        }
+
+        // Push current page into forwardStack before going back
+        forwardStack.push(currentPage);
+
+        // Pop from backStack and make it current page
+        currentPage = backStack.pop();
+
+        System.out.println("Went back to: " + currentPage);
+    }
+
+    // Function to go forward
+    public void forward() {
+        // Check if there is a page to go forward to
+        if (forwardStack.isEmpty()) {
+            System.out.println("No page to go forward to.");
+            return;
+        }
+
+        // Push current page into backStack before going forward
+        backStack.push(currentPage);
+
+        // Pop from forwardStack and make it current page
+        currentPage = forwardStack.pop();
+
+        System.out.println("Went forward to: " + currentPage);
+    }
+
+    // Function to display current page
+    public void showCurrentPage() {
+        System.out.println("Current page: " + currentPage);
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        BrowserNavigation browser = new BrowserNavigation();
+
+        browser.showCurrentPage(); // Home
+
+        browser.visit("google.com");
+        browser.visit("youtube.com");
+        browser.visit("github.com");
+
+        browser.back(); // github → youtube
+        browser.back(); // youtube → google
+        browser.forward(); // google → youtube
+
+        browser.visit("stackoverflow.com"); // clears forward stack
+        browser.back(); // stackoverflow → youtube
+    }
+}
+
+Output (step-by-step):
+
+Current page: Home
+Visited: google.com
+Visited: youtube.com
+Visited: github.com
+Went back to: youtube.com
+Went back to: google.com
+Went forward to: youtube.com
+Visited: stackoverflow.com
+Went back to: youtube.com
+
+
+Concept:
+Browsers use two stacks:
+
+backStack → to go back to previous pages
+
+forwardStack → to go forward to next pages
+
+When you visit a new page, it gets pushed onto the backStack, and forwardStack is cleared.
+
+When you click back, the current page goes to forwardStack, and the top of backStack becomes the new current page.
+
+When you click forward, current page moves to backStack, and top of forwardStack becomes current.
+
+
+//Hash Function 
+
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        // Step 1: Create a HashMap
+        HashMap<String, String> lockerRoom = new HashMap<>();
+
+        // Step 2: Add key-value pairs (name, locker content)
+        lockerRoom.put("Vimal", "Gym Shoes");
+        lockerRoom.put("Rahul", "Towel");
+        lockerRoom.put("Anita", "Yoga Mat");
+
+        // Step 3: Retrieve items using key
+        System.out.println("Vimal's Locker: " + lockerRoom.get("Vimal")); // Gym Shoes
+
+        // Step 4: Remove an item
+        lockerRoom.remove("Rahul");
+
+        // Step 5: Check if key exists
+        if (lockerRoom.containsKey("Anita")) {
+            System.out.println("Anita has something in her locker.");
+        }
+
+        // Step 6: Print all lockers
+        for (String name : lockerRoom.keySet()) {
+            System.out.println(name + "'s locker contains: " + lockerRoom.get(name));
+        }
+    }
+}
+
+// Student Database Management Using HashMap
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StudentDatabase {
+    public static void main(String[] args) {
+        HashMap<Integer, String> studentMap = new HashMap<>(); // Step 1
+        Scanner scanner = new Scanner(System.in);              // Step 2
+
+        while (true) { // Step 3
+            System.out.println("\n1. Add Student");
+            System.out.println("2. Remove Student");
+            System.out.println("3. Display Students");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt(); // Step 4
+
+            switch (choice) { // Step 5
+                case 1:
+                    System.out.print("Enter student ID: ");
+                    int id = scanner.nextInt(); // Step 6
+                    scanner.nextLine(); // to clear the buffer
+                    System.out.print("Enter student name: ");
+                    String name = scanner.nextLine(); // Step 7
+                    studentMap.put(id, name); // Step 8
+                    System.out.println("Student added successfully!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter student ID to remove: ");
+                    int removeId = scanner.nextInt(); // Step 9
+                    if (studentMap.containsKey(removeId)) {
+                        studentMap.remove(removeId); // Step 10
+                        System.out.println("Student removed successfully!");
+                    } else {
+                        System.out.println("Student ID not found.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("--- Student Records ---");
+                    for (int studentId : studentMap.keySet()) { // Step 11
+                        System.out.println("ID: " + studentId + ", Name: " + studentMap.get(studentId));
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Exiting... Thank you!");
+                    return; // Step 12
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
+
+//Word Frequency Counter using HashMap ie occurrences
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class WordFrequencyCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 1. Take input from user
+        System.out.println("Enter a sentence:");
+        String input = scanner.nextLine();
+
+        // 2. Convert to lowercase to count words case-insensitively
+        input = input.toLowerCase();
+
+        // 3. Split the input string into words using space
+        String[] words = input.split("\\s+");
+
+        // 4. Create a HashMap to store word frequencies
+        HashMap<String, Integer> wordCountMap = new HashMap<>();
+
+        // 5. Loop through the words and count them
+        for (String word : words) {
+            // Ignore punctuation
+            word = word.replaceAll("[^a-z]", ""); // remove non-letter characters
+
+            if (word.isEmpty()) continue; // skip if word is empty after removing punctuation
+
+            if (wordCountMap.containsKey(word)) {
+                // Word already exists → increment its count
+                wordCountMap.put(word, wordCountMap.get(word) + 1);
+            } else {
+                // New word → set count to 1
+                wordCountMap.put(word, 1);
+            }
+        }
+
+        // 6. Print the word frequency
+        System.out.println("\nWord Frequencies:");
+        for (String word : wordCountMap.keySet()) {
+            System.out.println(word + ": " + wordCountMap.get(word));
+        }
+
+        scanner.close();
+    }
+}
+
+//Phone Directory Using Hash Maps
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class PhoneDirectory {
+    public static void main(String[] args) {
+        HashMap<String, String> phoneBook = new HashMap<>();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\nPhone Directory Menu:");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Search Contact");
+            System.out.println("3. Delete Contact");
+            System.out.println("4. Display All Contacts");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // clear buffer
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter phone number: ");
+                    String number = scanner.nextLine();
+                    phoneBook.put(name, number);
+                    System.out.println("Contact added!");
+                    break;
+
+                case 2:
+                    System.out.print("Enter name to search: ");
+                    name = scanner.nextLine();
+                    if (phoneBook.containsKey(name)) {
+                        System.out.println("Phone Number: " + phoneBook.get(name));
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter name to delete: ");
+                    name = scanner.nextLine();
+                    if (phoneBook.remove(name) != null) {
+                        System.out.println("Contact deleted.");
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("\nAll Contacts:");
+                    for (String contact : phoneBook.keySet()) {
+                        System.out.println(contact + ": " + phoneBook.get(contact));
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Exiting Phone Directory.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+
+        } while (choice != 5);
+
+        scanner.close();
+    }
+}
+
+//Bubble sort
+
+public static void bubbleSort(int[] arr) {
+    int n = arr.length;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // swap
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Insertion sort (cards)
+
+public static void insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+

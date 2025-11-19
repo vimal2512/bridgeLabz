@@ -1,0 +1,30 @@
+public class Calculator {
+    
+    // Method 1: No parameters
+    void add() {
+        System.out.println("Nothing to add");
+    }
+
+    // Method 2: Two integers
+    void add(int a, int b) {
+        System.out.println("Sum (int): " + (a + b));
+    }
+
+    // Method 3: Two doubles
+    void add(double a, double b) {
+        System.out.println("Sum (double): " + (a + b));
+    }
+
+    // Method 4: Three numbers
+    void add(int a, int b, int c) {
+        System.out.println("Sum (3 ints): " + (a + b + c));
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        calc.add();
+        calc.add(10, 20);
+        calc.add(5.5, 4.5);
+        calc.add(1, 2, 3);
+    }
+}

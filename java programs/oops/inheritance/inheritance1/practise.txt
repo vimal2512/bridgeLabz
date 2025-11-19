@@ -1,0 +1,192 @@
+class Animal {
+  void eat() {
+    System.out.println("Animal is eating...");
+  }
+}
+
+class Dog extends Animal {
+   void bark() {
+     System.out.println("Animal is barking...");
+   }
+}
+
+
+public class SingleInheritanceDemo {
+  public static void main(String[] args) {
+     Dog d = new Dog();
+     dog.eat();
+     dog.bark();
+  }
+}
+
+
+class Animal {
+   void eat() {
+      System.out.println("Eating...");
+   }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking...");
+    }
+}  
+
+class Puppy extends Dog {
+    void weep() {
+      System.out.println("Weeping...");
+    }
+}
+
+public class MultilevelInheritanceDemo {
+   public static void main(String[] args) {
+      Puppy p = new Puppy();
+      p.eat();
+      p.bark();
+      p.weep();
+  }
+}
+
+class Animal {
+  void eat() {
+     System.out.println("Animal is eating...");
+  }
+}
+
+class Dog extends Animal {
+   void bark() {
+      System.out.println("Dog is barking...");
+   }
+}
+
+
+class Cat extends Animal {
+  void meow() {
+      System.out.println("Cat is meowing...");
+   }
+}
+
+
+public class HierarchicalInheritance {
+   public static void main(String[] args) {
+     Dog d = new Dog();
+     d.eat();
+     d.bark();
+
+     Cat c = new Cat();
+     c.eat();
+     c.bark();
+  }
+}
+
+
+//multiple inheritance
+
+interface Printable {
+  void print();
+}
+
+interface Showable {
+  void show();
+}
+
+class Document implements Printable,Showable {
+    public void print() {
+        System.out.println("Printing document");
+    }
+
+    public void show() {
+        System.out.println("Showing document");
+    }
+}
+
+public class MultipleInheritanceDemo {
+  public static void main(String[] args) {
+    Document doc = new Document();
+    doc.print();
+    doc.show();
+  }
+}
+
+//Simple overloading
+
+public class Calculator {
+  void add() {
+    System.out.println("Nothing to add");
+  }
+
+  void add(int a, int b) {
+    System.out.println("Sum(double) :" + (a+b));
+  }
+
+  void add(double a, double b) {
+    System.out.println("Sum(3 times) :" + (a+b));
+  }
+
+  void add(int a, int b, int c) {
+     System.out.println("Sum(3 ints) :" + (a+b+c));
+  }
+}
+
+public static void main(String[] args) {
+   Calculator calc = new Calculator();
+   calc.add();
+   calc.add(5.5,5.5);
+   calc.add(10,20);
+   calc.ad(1,2,3);
+}
+
+//Overloading by changing order of parameters
+
+public class OverloadOrder {
+  void display(String name, int age) {
+    System.out.println("Name: " + name + "Age: " + age);
+  }
+
+  void display(int age, String name) {
+     System.out.println("Age: " + age + " Name: " + name);
+  }
+
+  public static void main(String[] args) {
+     Overloader obj = new Overloader();
+     obj.display("vimal" , 25);
+     obj.display(28, "vimal");
+  }
+}
+
+
+//overloading type promotion
+
+public class TypePromotion {
+  void show(int a, long b) {
+    System.out.println("int and long called");
+  }
+
+  public static void main(String[] args) {
+    TypePromotion t = new TypePromotion();
+    t.show(10,20);
+  }
+}
+
+// Overloading example
+
+public class Login {
+  void login(String username, String password) {
+    System.out.println("Login with username and password");
+  }
+
+  void login(String email) {
+     System.out.println("Login with email link");
+  } 
+
+  void login(long phoneNumber) {
+    System.out.println("Logged in with otp to phone");
+  }
+
+   public static void main(String[] args) {
+      Login l = new Login();
+      l.login("user123", "pass123");
+      l.login("user@example.com");
+      l.login(9876543210L);
+   }
+}

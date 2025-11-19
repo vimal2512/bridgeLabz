@@ -1,0 +1,143 @@
+1. Basic Map Operations (Insertion, Retrieval, Deletion)
+
+import java.util.*;
+
+public class BasicMapOperations {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("Apple", 3);
+        map.put("Banana", 5);
+        map.put("Orange", 2);
+
+        System.out.println("Original Map: " + map);
+        System.out.println("Value of Banana: " + map.get("Banana"));
+
+        map.remove("Orange");
+        System.out.println("Map after removing Orange: " + map);
+    }
+}
+
+
+Output:
+
+Original Map: {Apple=3, Banana=5, Orange=2}
+Value of Banana: 5
+Map after removing Orange: {Apple=3, Banana=5}
+
+
+2. Iterating Over Map Entries
+
+import java.util.*;
+
+public class MapIterationExample {
+    public static void main(String[] args) {
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Alice", 90);
+        scores.put("Bob", 85);
+        scores.put("Charlie", 92);
+
+        for (Map.Entry<String, Integer> entry : scores.entrySet()) {
+            System.out.println(entry.getKey() + " scored " + entry.getValue());
+        }
+    }
+}
+
+entrySet() - We use entrySet() to get all key-value pairs as a Set of Map.Entry
+
+Output:
+
+Alice scored 90
+Bob scored 85
+Charlie scored 92
+
+3. Frequency Count Using Map
+
+import java.util.*;
+
+public class WordFrequencyCounter {
+    public static void main(String[] args) {
+        String text = "apple banana apple orange banana apple";
+        String[] words = text.split(" ");
+
+        Map<String, Integer> frequency = new HashMap<>();
+        for (String word : words) {
+            frequency.put(word, frequency.getOrDefault(word, 0) + 1);
+        }
+
+        System.out.println("Word Frequencies: " + frequency);
+    }
+}
+
+// getOrDefault(word, 0) returns the existing count or 0 if the word doesn’t exist.
+
+Output:
+
+Word Frequencies: {orange=1, banana=2, apple=3}
+
+
+ 4. TreeMap – Sorted Map
+
+import java.util.*;
+
+public class SortedMapExample {
+    public static void main(String[] args) {
+        Map<Integer, String> sortedMap = new TreeMap<>();
+
+        sortedMap.put(3, "Three");
+        sortedMap.put(1, "One");
+        sortedMap.put(2, "Two");
+
+        System.out.println("Sorted Map: " + sortedMap);
+    }
+}
+
+Output:
+
+Sorted Map: {1=One, 2=Two, 3=Three}
+
+ 5. LinkedHashMap – Preserves Insertion Order
+
+import java.util.*;
+
+public class LinkedHashMapDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new LinkedHashMap<>();
+
+        map.put("Dog", 1);
+        map.put("Cat", 2);
+        map.put("Horse", 3);
+
+        System.out.println("LinkedHashMap (insertion order): " + map);
+    }
+}
+
+6. Grouping Elements by Criteria (Map of Lists)
+
+import java.util.*;
+
+public class GroupingExample {
+    public static void main(String[] args) {
+        String[] names = {"Alice", "Bob", "Alex", "Brian", "Charlie"};
+        Map<Character, List<String>> grouped = new HashMap<>();
+
+        for (String name : names) {
+            char key = name.charAt(0);
+            grouped.computeIfAbsent(key, k -> new ArrayList<>()).add(name);
+        }
+
+        System.out.println("Grouped Names: " + grouped);
+    }
+}
+
+Output:
+
+Grouped Names: {A=[Alice, Alex], B=[Bob, Brian], C=[Charlie]}
+
+
+//It groups names by their first letter (A → Alice, Alex, B → Bob, Brian).
+
+//computeIfAbsent() checks if a key exists; if not, it creates a new list.
+
+
+

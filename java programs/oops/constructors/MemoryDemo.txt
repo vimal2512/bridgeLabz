@@ -1,0 +1,6 @@
+public class MemoryDemo {
+    public static void main(String[] args) {
+        int x = 10;                  // Stored in Stack
+        Student s = new Student();  // Object in Heap, ref in Stack
+    }
+}

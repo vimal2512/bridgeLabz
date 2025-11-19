@@ -1,0 +1,18 @@
+class Room {
+    String name;
+    
+    Room(String name) {
+        this.name = name;
+    }
+}
+
+class House {
+    // Composition: House creates and controls Room objects
+    Room room1 = new Room("Living Room");
+    Room room2 = new Room("Bedroom");
+}
+
+
+Composition is a strong "has-a" relationship, where one class owns another class.
+If the container object is destroyed, the contained objects are also destroyed.
+This implies tight coupling and lifespan dependency.

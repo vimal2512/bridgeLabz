@@ -1,0 +1,31 @@
+class Exam {
+    private String subject;
+    private int maxMarks;
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setMaxMarks(int maxMarks) {
+        this.maxMarks = maxMarks;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public int getMaxMarks() {
+        return maxMarks;
+    }
+}
+
+public class ExamDemo {
+    public static void main(String[] args) {
+        Exam e = new Exam();
+        e.setSubject("Java Programming");
+        e.setMaxMarks(100);
+
+        System.out.println("Subject: " + e.getSubject());
+        System.out.println("Max Marks: " + e.getMaxMarks());
+    }
+}

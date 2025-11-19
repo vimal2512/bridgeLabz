@@ -1,0 +1,80 @@
+Optional is a wrapper around an object that may be null, providing a safer way to handle null values.
+
+
+1. Create an Optional from a non-null value
+
+import java.util.Optional;
+
+public class OptionalDemo1 {
+    public static void main(String[] args) {
+        Optional<String> name = Optional.of("Vimal");
+        System.out.println("Name: " + name.get());
+    }
+}
+
+Output:
+Name: Vimal
+
+2. Use isPresent() to check value existence
+
+import java.util.Optional;
+
+public class OptionalDemo2 {
+    public static void main(String[] args) {
+        Optional<String> name = Optional.ofNullable("Raj");
+        if (name.isPresent()) {
+            System.out.println("Value exists: " + name.get());
+        } else {
+            System.out.println("Value is absent");
+        }
+    }
+}
+
+Output:
+
+Value exists: Raj
+
+3. Use orElse() to provide a default
+
+import java.util.Optional;
+
+public class OptionalDemo3 {
+    public static void main(String[] args) {
+        Optional<String> name = Optional.ofNullable(null);
+        System.out.println("Name: " + name.orElse("Default Name"));
+    }
+}
+
+Output:
+
+Name: Default Name
+
+4. Use ifPresent() to act only when present
+
+import java.util.Optional;
+
+public class OptionalDemo4 {
+    public static void main(String[] args) {
+        Optional<String> language = Optional.of("Java");
+        language.ifPresent(value -> System.out.println("Language is: " + value));
+    }
+}
+
+Output:
+Language is: Java
+
+5. Use map() to transform the value
+
+import java.util.Optional;
+
+public class OptionalDemo5 {
+    public static void main(String[] args) {
+        Optional<String> name = Optional.of("vimal");
+        Optional<String> upperName = name.map(String::toUpperCase);
+        upperName.ifPresent(System.out::println);
+    }
+}
+
+Output:
+VIMAL
+

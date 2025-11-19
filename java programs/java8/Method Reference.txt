@@ -1,0 +1,167 @@
+Method Reference is a shorthand notation of a lambda expression to call a method directly by its name.
+It refers to a method of a class or object without executing it, and is used as a cleaner and more readable alternative to lambda expressions
+
+
+1. Static Method Reference
+
+Java Feature: Method Reference (ClassName::methodName)
+Functional Interface Used: Function<T, R>
+
+
+import java.util.function.Function;
+
+public class StaticRef {
+    public static int square(int n) {
+        return n * n;
+    }
+
+    public static void main(String[] args) {
+        Function<Integer, Integer> func = StaticRef::square;
+        System.out.println("Square: " + func.apply(5));
+    }
+}
+
+Output:
+
+Square: 25
+
+Note:
+What is this line doing?
+ Function<Integer, Integer> func = StaticRef::square;
+It’s saying:
+
+"Whenever someone calls func.apply(someNumber), I want it to call the square() method from the StaticRef class."
+
+Equivalent using Lambda:
+Function<Integer, Integer> func = n -> square(n);
+
+
+2. Instance Method of a Particular Object
+
+import java.util.function.Consumer;
+
+public class InstanceRef {
+    public void show(String msg) {
+        System.out.println("Message: " + msg);
+    }
+
+    public static void main(String[] args) {
+        InstanceRef obj = new InstanceRef();  // Step 1: Create object
+        Consumer<String> consumer = obj::show; // Step 2: Method reference
+        consumer.accept("Hello from method reference!"); // Step 3: Call
+    }
+}
+
+Output:
+
+Message: Hello from method reference!
+
+Note:
+Consumer<String> consumer = obj::show;
+“Hey Java, whenever someone uses consumer.accept(someString), just call obj.show(someString).”
+
+shorthand for :
+Consumer<String> consumer = (msg) -> obj.show(msg);
+
+
+
+3. Instance Method of an Arbitrary Object
+
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ArbitraryInstanceRef {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("vimal", "raj", "java");
+        names.stream()
+             .map(String::toUpperCase)
+             .forEach(System.out::println);
+    }
+}
+
+Output:
+
+VIMAL
+RAJ
+JAVA
+
+Note:
+String::toUpperCase is a method reference
+It refers to the toUpperCase() method of the String class
+It is called on each element of the list automatically
+
+So it behaves like: .map(name -> name.toUpperCase())
+
+.forEach(System.out::println);
+Prints each string using another method reference.
+
+4. Constructor Reference
+
+import java.util.function.Supplier;
+import java.util.ArrayList;
+
+public class ConstructorRef {
+    public static void main(String[] args) {
+        Supplier<ArrayList<String>> supplier = ArrayList::new;
+        ArrayList<String> list = supplier.get();
+        list.add("Java");
+        list.add("8");
+        System.out.println(list);
+    }
+}
+
+Output:
+
+[Java, 8]
+
+Note:
+ArrayList::new is a constructor reference.
+It means: "Call the new ArrayList<>() constructor when needed."
+
+this line is equal to:
+Supplier<ArrayList<String>> supplier = () -> new ArrayList<>();
+
+Create a New ArrayList
+ArrayList<String> list = supplier.get();
+
+
+ 5. With Threads (Real-time use)
+
+public class ThreadExample {
+    public static void printTask() {
+        System.out.println("Running in thread");
+    }
+
+    public static void main(String[] args) {
+        Thread t = new Thread(ThreadExample::printTask);
+        t.start();
+    }
+}
+
+Output :
+
+Running in thread
+
+Note:
+Thread t = new Thread(ThreadExample::printTask);
+
+Thread class accepts a Runnable interface:
+public interface Runnable {
+    void run();
+}
+
+ThreadExample::printTask
+This line is equivalent to writing:
+Thread t = new Thread(() -> ThreadExample.printTask());
+
+Which is also equivalent to:
+Runnable task = new Runnable() {
+    public void run() {
+        ThreadExample.printTask();
+    }
+};
+Thread t = new Thread(task);
+
+
+

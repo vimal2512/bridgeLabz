@@ -1,0 +1,564 @@
+Program 1: Basic ArrayList Usage
+
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+public class BasicArrayList {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("Java");
+        names.add("Python");
+        names.add("C++");
+
+        System.out.println("ArrayList: " + names);
+        System.out.println("Size: " + names.size());
+    }
+}
+
+Output:
+ArrayList: [Java, Python, C++]
+Size: 3
+
+
+Program 2: Insert Element at a Specific Index in ArrayList
+This demonstrates how to use the add(int index, E element) method.
+
+import java.util.ArrayList;
+
+public class InsertAtIndex {
+    public static void main(String[] args) {
+        ArrayList<String> languages = new ArrayList<>();
+
+        // Initial elements
+        languages.add("Java");
+        languages.add("Python");
+        languages.add("C++");
+
+        System.out.println("Original List: " + languages);
+
+        // Insert at index 1
+        languages.add(1, "JavaScript");
+
+        System.out.println("After inserting at index 1: " + languages);
+    }
+}
+
+Output:
+
+Original List: [Java, Python, C++]
+After inserting at index 1: [Java, JavaScript, Python, C++]
+
+Program 3: Remove Elements from an ArrayList
+
+import java.util.ArrayList;
+
+public class RemoveElements {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        fruits.add("Orange");
+
+        System.out.println("Original List: " + fruits);
+
+        // Remove element by value
+        fruits.remove("Mango");
+
+        // Remove element by index
+        fruits.remove(1); // Removes "Banana"
+
+        System.out.println("After removals: " + fruits);
+
+        // Clear all elements
+        fruits.clear();
+        System.out.println("After clearing all: " + fruits);
+    }
+}
+
+
+Output:
+Original List: [Apple, Banana, Mango, Orange]
+After removals: [Apple, Orange]
+After clearing all: []
+
+Program 4: Update/Modify Elements in an ArrayList
+This example uses the set(int index, E element) method to update elements.
+
+import java.util.ArrayList;
+
+public class UpdateArrayList {
+    public static void main(String[] args) {
+        ArrayList<String> colors = new ArrayList<>();
+
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+
+        System.out.println("Original List: " + colors);
+
+        // Update the element at index 1
+        colors.set(1, "Yellow");
+
+        System.out.println("After update: " + colors);
+    }
+}
+
+Output:
+
+Original List: [Red, Green, Blue]
+After update: [Red, Yellow, Blue]
+
+Program 5: Search Elements in an ArrayList
+
+import java.util.ArrayList;
+
+public class SearchArrayList {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+        names.add("Alice");
+
+        // Print the list
+        System.out.println("Names: " + names);
+
+        // Check if a name exists
+        System.out.println("Contains 'Bob'? " + names.contains("Bob"));
+        System.out.println("Contains 'Eve'? " + names.contains("Eve"));
+
+        // Find index of first and last occurrence
+        System.out.println("First index of 'Alice': " + names.indexOf("Alice"));
+        System.out.println("Last index of 'Alice': " + names.lastIndexOf("Alice"));
+    }
+}
+
+
+Output:
+
+Names: [Alice, Bob, Charlie, Alice]
+Contains 'Bob'? true
+Contains 'Eve'? false
+First index of 'Alice': 0
+Last index of 'Alice': 3
+
+Program 6: Traverse ArrayList using different methods:
+
+using for loop, for each, Iterator, ListIterator (forward & backward)
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import.java.util.ListIterator;
+
+public class TraverseArrayList {
+  public static void main(String[] args) {
+    ArrayList<String> fruits = new ArrayList<>();
+  
+    fruits.add("Apple");
+    fruits.add("Banana");
+    fruits.add("Cherry");
+
+     System.out.println("Using for loop:");
+     for(int i=0;i<fruits.size();i++) {
+       System.out.println(fruits.get(i));
+     }
+
+     System.out.println("\nUsing enhanced for loop:");
+     for(String fruit : fruits) {
+      System.out.println(fruit);
+     }
+
+     System.out.println("\nUsing Iterator:");
+     Iterator<String> it = fruits.iterator();
+     while(it.hasNext()) {
+       System.out.println(it.next());
+     }
+
+      System.out.println("\nUsing ListIterator (forward):");
+      ListIterator<String> listIt = fruits.listIterator();
+      while(listIt.hasNext()) {
+         System.out.println(listIt.next());
+     }
+
+     System.out.println("\nUsing ListIterator (backward):");
+     while(listIt.hasPrevious()) {
+       System.out.println(listIt.previous());
+     }
+    
+  }
+}
+
+Output:
+
+Using for loop:
+Apple
+Banana
+Cherry
+
+Using enhanced for loop:
+Apple
+Banana
+Cherry
+
+Using Iterator:
+Apple
+Banana
+Cherry
+
+Using ListIterator (forward):
+Apple
+Banana
+Cherry
+
+Using ListIterator (backward):
+Cherry
+Banana
+Apple
+
+Program 7: Remove Elements from an ArrayList
+This program covers: remove(int index),remove(Object o),removeIf(Predicate),clear()
+
+import java.util.ArrayList;
+
+public class RemoveArrayListElements {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();
+
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+        names.add("David");
+        names.add("Bob");
+
+        System.out.println("Original List: " + names);
+
+        // Remove by index
+        names.remove(2); // removes "Charlie"
+        System.out.println("After removing index 2: " + names);
+
+        // Remove by object
+        names.remove("Bob"); // removes first "Bob"
+        System.out.println("After removing 'Bob': " + names);
+
+        // Remove using condition
+        names.removeIf(name -> name.startsWith("D")); // removes "David"
+        System.out.println("After removeIf condition: " + names);
+
+        // Clear all
+        names.clear();
+        System.out.println("After clear(): " + names);
+    }
+}
+
+
+Output:
+
+Original List: [Alice, Bob, Charlie, David, Bob]
+After removing index 2: [Alice, Bob, David, Bob]
+After removing 'Bob': [Alice, David, Bob]
+After removeIf condition: [Alice, Bob]
+After clear(): []
+
+
+Program 8: Sort and Reverse the ArrayList using Collections.sort() & Collections.reverse()
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortReverseArrayList {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+
+        fruits.add("Banana");
+        fruits.add("Apple");
+        fruits.add("Mango");
+        fruits.add("Orange");
+
+        System.out.println("Original List: " + fruits);
+
+        // Sort alphabetically
+        Collections.sort(fruits);
+        System.out.println("Sorted List: " + fruits);
+
+        // Reverse the sorted list
+        Collections.reverse(fruits);
+        System.out.println("Reversed List: " + fruits);
+    }
+}
+
+Output:
+
+Original List: [Banana, Apple, Mango, Orange]
+Sorted List: [Apple, Banana, Mango, Orange]
+Reversed List: [Orange, Mango, Banana, Apple]
+
+Program 9: Convert ArrayList to Array and vice versa
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class ConvertArrayListArray {
+    public static void main(String[] args) {
+        // ArrayList to Array
+        ArrayList<String> colors = new ArrayList<>();
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+
+        String[] colorArray = new String[colors.size()];
+        colors.toArray(colorArray);
+
+        System.out.println("ArrayList: " + colors);
+        System.out.println("Converted to Array: " + Arrays.toString(colorArray));
+
+        // Array to ArrayList
+        String[] animals = {"Dog", "Cat", "Elephant"};
+        ArrayList<String> animalList = new ArrayList<>(Arrays.asList(animals));
+
+        System.out.println("Array: " + Arrays.toString(animals));
+        System.out.println("Converted to ArrayList: " + animalList);
+    }
+}
+
+Output:
+
+ArrayList: [Red, Green, Blue]
+Converted to Array: [Red, Green, Blue]
+Array: [Dog, Cat, Elephant]
+Converted to ArrayList: [Dog, Cat, Elephant]
+
+Program 10: Clone an ArrayList and Check Equality Between ArrayLists
+
+
+import java.util.ArrayList;
+i
+public class CloneAndEqualsArrayList {
+    public static void main(String[] args) {
+        // Original ArrayList
+        ArrayList<String> list1 = new ArrayList<>();
+        list1.add("Java");
+        list1.add("Python");
+        list1.add("C++");
+
+        // Clone list1 to list2
+        @SuppressWarnings("unchecked")
+        ArrayList<String> list2 = (ArrayList<String>) list1.clone();
+
+        System.out.println("Original List (list1): " + list1);
+        System.out.println("Cloned List (list2): " + list2);
+
+        // Check if both lists are equal
+        boolean areEqual = list1.equals(list2);
+        System.out.println("Are list1 and list2 equal? " + areEqual);
+
+        // Modify list2 and check again
+        list2.add("JavaScript");
+        System.out.println("\nModified Cloned List (list2): " + list2);
+        System.out.println("Are list1 and list2 still equal? " + list1.equals(list2));
+    }
+}
+
+Output:
+
+Original List (list1): [Java, Python, C++]
+Cloned List (list2): [Java, Python, C++]
+Are list1 and list2 equal? true
+
+Modified Cloned List (list2): [Java, Python, C++, JavaScript]
+Are list1 and list2 still equal? false
+
+
+Program 11: Use retainAll, removeAll, and containsAll to compare and filter lists
+
+  Keep only common elements with retainAll()
+  Remove elements that exist in another list with removeAll()
+  Check if one list contains all elements of another with containsAll()
+
+import java.util.ArrayList;
+
+public class ArrayListComparison {
+    public static void main(String[] args) {
+        ArrayList<String> listA = new ArrayList<>();
+        listA.add("Apple");
+        listA.add("Banana");
+        listA.add("Cherry");
+
+        ArrayList<String> listB = new ArrayList<>();
+        listB.add("Banana");
+        listB.add("Cherry");
+        listB.add("Date");
+
+        // retainAll(): keeps only the common elements
+        ArrayList<String> common = new ArrayList<>(listA);
+        common.retainAll(listB);
+        System.out.println("Common Elements (retainAll): " + common);
+
+        // removeAll(): removes all elements from listA that are in listB
+        ArrayList<String> uniqueToA = new ArrayList<>(listA);
+        uniqueToA.removeAll(listB);
+        System.out.println("Elements unique to listA (removeAll): " + uniqueToA);
+
+        // containsAll(): checks if listA contains all elements of listB
+        boolean containsAll = listA.containsAll(listB);
+        System.out.println("Does listA contain all elements of listB? " + containsAll);
+    }
+}
+
+Output:
+
+Common Elements (retainAll): [Banana, Cherry]
+Elements unique to listA (removeAll): [Apple]
+Does listA contain all elements of listB? false
+
+
+Program 12–16: Core Functional Concepts
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class ArrayListAdvanced {
+    public static void main(String[] args) {
+        // 1. Convert ArrayList to Array
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Mango");
+        fruits.add("Apple");
+        fruits.add("Banana");
+
+        String[] fruitArray = new String[fruits.size()];
+        fruits.toArray(fruitArray);
+        System.out.println("Converted to Array: " + Arrays.toString(fruitArray));
+
+        // 2. Convert Array to ArrayList
+        String[] vegetables = {"Carrot", "Potato", "Tomato"};
+        ArrayList<String> vegList = new ArrayList<>(Arrays.asList(vegetables));
+        System.out.println("Converted to ArrayList: " + vegList);
+
+        // 3. Check if empty
+        System.out.println("Is fruit list empty? " + fruits.isEmpty());
+
+        // 4. Replace an element
+        fruits.set(1, "Orange"); // replace "Apple" with "Orange"
+        System.out.println("After replacing second element: " + fruits);
+
+        // 5. Sort
+        Collections.sort(fruits);
+        System.out.println("Sorted fruits: " + fruits);
+    }
+}
+
+Program Output:
+
+Converted to Array: [Mango, Apple, Banana]
+Converted to ArrayList: [Carrot, Potato, Tomato]
+Is fruit list empty? false
+After replacing second element: [Mango, Orange, Banana]
+Sorted fruits: [Banana, Mango, Orange]
+
+Program 17–20: Custom Objects, Cloning, Sublist, and Iteration
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+class Student {
+    int id;
+    String name;
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String toString() {
+        return id + " - " + name;
+    }
+}
+
+public class ArrayListOperations {
+    public static void main(String[] args) {
+        // 6. Clone ArrayList
+        ArrayList<String> colors = new ArrayList<>();
+        colors.add("Red");
+        colors.add("Green");
+        ArrayList<String> clonedColors = (ArrayList<String>) colors.clone();
+        System.out.println("Cloned list: " + clonedColors);
+
+        // 7. SubList
+        colors.add("Blue");
+        List<String> sub = colors.subList(0, 2); // index 0 and 1
+        System.out.println("Sublist: " + sub);
+
+        // 8. ArrayList of custom objects
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student(101, "Vimal"));
+        students.add(new Student(102, "Raj"));
+        System.out.println("Students: " + students);
+
+        // 9. Using Collections.reverse
+        Collections.reverse(colors);
+        System.out.println("Reversed colors: " + colors);
+
+        // 10. Iterate using all methods
+        System.out.println("Iterating with for loop:");
+        for (int i = 0; i < colors.size(); i++) {
+            System.out.println(colors.get(i));
+        }
+
+        System.out.println("Iterating with for-each:");
+        for (String color : colors) {
+            System.out.println(color);
+        }
+
+        System.out.println("Iterating with Iterator:");
+        Iterator<String> it = colors.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+
+        System.out.println("Iterating with ListIterator (reverse):");
+        ListIterator<String> listIt = colors.listIterator(colors.size());
+        while (listIt.hasPrevious()) {
+            System.out.println(listIt.previous());
+        }
+
+        // 10. Clear elements
+        colors.clear();
+        System.out.println("After clearing, colors: " + colors);
+    }
+}
+
+Output:
+
+Cloned list: [Red, Green]
+Sublist: [Red, Green]
+Students: [101 - Vimal, 102 - Raj]
+Reversed colors: [Blue, Green, Red]
+Iterating with for loop:
+Blue
+Green
+Red
+Iterating with for-each:
+Blue
+Green
+Red
+Iterating with Iterator:
+Blue
+Green
+Red
+Iterating with ListIterator (reverse):
+Red
+Green
+Blue
+After clearing, colors: []
+
+
+

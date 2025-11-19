@@ -1,0 +1,7 @@
+final class Animal {
+  void sound() {
+    System.out.println("Animal sound");
+}
+}
+
+// class Dog extends Animal {} ❌ Cannot inherit from final class

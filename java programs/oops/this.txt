@@ -1,0 +1,117 @@
+Example 1: this.variable (Resolve conflict between instance and parameter)
+
+class Student {
+  String name; //instance variable
+
+  Student(String name) {
+   this.name = name; // this.name refers to instance variable
+  }
+
+  void display() {
+    System.out.println("Name: " + this.name);
+  }
+
+ public static void main(String[] args) {
+   Student s = new Student("Vimal Raj");
+   s.display();
+ }
+}
+
+output:
+  Name: Vimal Raj
+
+Example 2: this() to call another constructor
+
+class Book {
+    String title;
+    int pages;
+
+    Book() {
+        this("Untitled", 0); // calls the below constructor
+    }
+
+    Book(String title, int pages) {
+        this.title = title;
+        this.pages = pages;
+    }
+
+    void show() {
+        System.out.println("Title: " + title + ", Pages: " + pages);
+    }
+
+    public static void main(String[] args) {
+        Book b1 = new Book();
+        Book b2 = new Book("Java", 300);
+        b1.show();
+        b2.show();
+    }
+}
+
+output:
+  Title: Untitled, Pages: 0
+  Title: Java, Pages: 300
+
+Example 3: this to call method inside same class
+
+class Example {
+  void method1() {
+    System.out.println("Method 1 called");
+    this.method2();
+  }
+
+  void method2() {
+     System.out.println("Method 2 called");
+  }
+
+  public static void main(String[] args) {
+    Example ex = new Example();
+    ex.method1();
+  }
+}
+
+Output:
+  Method1 called
+  Method2 called
+
+Example 4: Pass this as argument
+
+class Car {
+  void show(Car c) {
+   System.out.println("This is Car object: " + c);
+ }
+
+ void display() {
+   show(this);  // passing current object
+ }
+
+ public static void main(String[] args) {
+   Car c = new Car();
+   c.display();
+ }
+}
+
+output:
+  This is Car object: Car@15db9742
+
+
+Example 5: Return this
+
+class Demo {
+    int value;
+
+    Demo setValue(int value) {
+        this.value = value;
+        return this; // return current object
+    }
+
+    void print() {
+        System.out.println("Value: " + value);
+    }
+
+    public static void main(String[] args) {
+        new Demo().setValue(50).print(); // method chaining
+    }
+}
+
+
+

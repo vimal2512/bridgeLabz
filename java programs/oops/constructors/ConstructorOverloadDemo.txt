@@ -1,0 +1,28 @@
+class Employee {
+   String name;
+   int id;
+
+   Employee() {
+     name = "unknown";
+     id = 0;
+   }
+  
+   Employee(String n, int i){
+     name = n;
+     int = i;
+   }
+
+   void display() {
+    System.out.println("Name: " + name +" ID: " + id);
+   }
+}
+
+
+public class ConstructorOverloadDemo {
+  public static void main (String[] args) {
+     Employee e1 = new Employee();
+     Employee e2 = new Employee("vimal" , 1);
+     e1.display();
+     e2.display();
+  }
+}

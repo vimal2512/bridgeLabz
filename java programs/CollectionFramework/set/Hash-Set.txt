@@ -1,0 +1,118 @@
+1. Basic HashSet Operations
+
+import java.util.HashSet;
+
+public class HashSetBasics {
+    public static void main(String[] args) {
+        // Creating a HashSet
+        HashSet<String> fruits = new HashSet<>();
+
+        // Adding elements
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        fruits.add("Orange");
+        fruits.add("Banana"); // Duplicate, will not be added
+
+        // Display elements
+        System.out.println("Fruits: " + fruits);
+
+        // Check for existence
+        System.out.println("Contains Mango? " + fruits.contains("Mango"));
+
+        // Remove an element
+        fruits.remove("Apple");
+
+        // Size
+        System.out.println("Size: " + fruits.size());
+
+        // Iterating using for-each loop
+        System.out.println("Iterating:");
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
+
+output:
+
+Fruits: [Banana, Orange, Apple, Mango]
+Contains Mango? true
+Size: 3
+Iterating:
+Banana
+Orange
+Mango
+
+2.Remove Duplicates from a List using HashSet
+
+import java.util.*;
+
+public class RemoveDulicates {
+   public static void main(String[] args) {
+       // List with duplicate elements
+       List<String> names = Arrays.asList("john", "Alice", "Bob", "Alice", "John", "David"); 
+
+       // convert to HashSet to remove duplicates
+       Set<String> uniqueNames = new HashSet<>(names);
+
+      //Display result
+      System.out.println("Original list: " + names);
+      System.out.println("Unique names (No duplicates): " + uniqueNames);
+   }
+}
+
+ Output:
+ Original List: [John, Alice, Bob, Alice, John, David]
+ Unique Names (No Duplicates): [Bob, Alice, David, John]
+
+ 3: Set Operations (Union, Intersection, Difference) using HashSet?
+    HashSet does not maintain order. So output order may vary
+
+  import.java.util.*;
+  
+  public class SetOperations {
+    public static void main(String[] args) {
+      // Set A
+      Set<String> setA = new HashSet<>();
+      setA.add("Apple");
+      setA.add("Banana");
+      setA.add("Cherry");
+
+     // Set B
+     Set<String> setB = new HashSet<>();
+     setB.add("Banana");
+     setB.add("Dragon fruit");
+     setB.add("Cherry");
+
+     // Union
+     Set<String> union = new HashSet<>(setA);
+     union.addAll(setB);
+     System.out.println("Union: " + union);
+
+     //Intersection
+     Set<String> intersection = new HashSet<>(setA);
+     intersection.retainAll(setB);
+     System.out.println("Intersection: " + intersection);
+
+     //Difference (A-B)
+     Set<String> difference = new HashSet<>(setA);
+     difference.removeAll(setB);
+     System.out.println("Difference (A-B): " + difference);
+    }
+  }
+
+Output:
+
+Union: [Dragonfruit, Banana, Apple, Cherry]
+Intersection: [Banana, Cherry]
+Difference (A - B): [Apple]
+
+
+
+
+
+
+
+ 
+  

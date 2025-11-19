@@ -1,0 +1,26 @@
+//Library Book Management
+
+class Book {
+    private String title;
+    private String author;
+    private boolean isAvailable;
+
+    public void setDetails(String title, String author, boolean isAvailable) {
+        this.title = title;
+        this.author = author;
+        this.isAvailable = isAvailable;
+    }
+
+    public void getDetails() {
+        System.out.println("Book: " + title + " by " + author);
+        System.out.println("Available: " + (isAvailable ? "Yes" : "No"));
+    }
+}
+
+public class LibraryDemo {
+    public static void main(String[] args) {
+        Book b = new Book();
+        b.setDetails("Effective Java", "Joshua Bloch", true);
+        b.getDetails();
+    }
+}

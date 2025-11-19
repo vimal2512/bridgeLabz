@@ -1,0 +1,122 @@
+What is a Map?
+A Map is a collection object that stores data in key-value pairs.
+
+Each key is unique, but values can be duplicate.
+
+It does not extend Collection, but it's part of the Java Collections Framework.
+
+types:
+
+HashMap	        No order guaranteed, fast, allows one null key
+LinkedHashMap	Maintains insertion order
+TreeMap	        Sorted by keys (natural order or custom comparator)
+Hashtable	Synchronized, thread-safe, no null keys or values
+
+
+// Java Program Demonstrating All Map Concepts
+import java.util.*;
+
+public class MapConceptsExamples {
+    public static void main(String[] args) {
+
+        // 1. HashMap Examples
+        System.out.println("\n1. HashMap Examples");
+
+        // Program 1: Basic CRUD
+        Map<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("A", 1);
+        hashMap.put("B", 2);
+        hashMap.put("C", 3);
+        System.out.println("HashMap CRUD: " + hashMap);
+        hashMap.remove("B");
+        System.out.println("Get C: " + hashMap.get("C"));
+
+        // Program 2: Word Frequency
+        String sentence = "apple banana apple orange banana apple";
+        Map<String, Integer> wordFreq = new HashMap<>();
+        for (String word : sentence.split(" ")) {
+            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
+        }
+        System.out.println("Word Frequency: " + wordFreq);
+
+        // Program 3: Compare Two Maps
+        Map<String, String> map1 = new HashMap<>();
+        Map<String, String> map2 = new HashMap<>();
+        map1.put("a", "apple");
+        map2.put("a", "apple");
+        System.out.println("Maps Equal: " + map1.equals(map2));
+
+
+        // 2. LinkedHashMap Examples
+        System.out.println("\n2. LinkedHashMap Examples");
+
+        // Program 1: Insertion Order
+        Map<String, Integer> linkedMap = new LinkedHashMap<>();
+        linkedMap.put("X", 100);
+        linkedMap.put("Y", 200);
+        linkedMap.put("Z", 300);
+        System.out.println("LinkedHashMap Insertion Order: " + linkedMap);
+
+        // Program 2: Access Order LRU
+        Map<Integer, String> lruMap = new LinkedHashMap<>(3, 0.75f, true);
+        lruMap.put(1, "One");
+        lruMap.put(2, "Two");
+        lruMap.put(3, "Three");
+        lruMap.get(1);
+        lruMap.put(4, "Four");
+        System.out.println("Access Order LRU: " + lruMap);
+
+        // Program 3: Remove Duplicates (Preserve Order)
+        String[] pets = {"cat", "dog", "cat", "bird"};
+        Map<String, Boolean> uniquePets = new LinkedHashMap<>();
+        for (String pet : pets) {
+            uniquePets.put(pet, true);
+        }
+        System.out.println("Unique Pets: " + uniquePets.keySet());
+
+
+        // 3. TreeMap Examples
+        System.out.println("\n3. TreeMap Examples");
+
+        // Program 1: Sorted by Key
+        Map<String, Integer> treeMap = new TreeMap<>();
+        treeMap.put("Banana", 2);
+        treeMap.put("Apple", 5);
+        treeMap.put("Orange", 3);
+        System.out.println("TreeMap Sorted: " + treeMap);
+
+        // Program 2: Reverse Order Sorting
+        Map<String, Integer> revTreeMap = new TreeMap<>(Collections.reverseOrder());
+        revTreeMap.put("Banana", 2);
+        revTreeMap.put("Apple", 5);
+        revTreeMap.put("Orange", 3);
+        System.out.println("TreeMap Reversed: " + revTreeMap);
+
+        // Program 3: Range Search using subMap()
+        TreeMap<Integer, String> numberMap = new TreeMap<>();
+        numberMap.put(1, "One");
+        numberMap.put(5, "Five");
+        numberMap.put(10, "Ten");
+        System.out.println("SubMap (1 to 10): " + numberMap.subMap(1, 10));
+    }
+}
+
+/*
+Expected Output:
+
+1. HashMap Examples
+HashMap CRUD: {A=1, B=2, C=3}
+Get C: 3
+Word Frequency: {orange=1, banana=2, apple=3}
+Maps Equal: true
+
+2. LinkedHashMap Examples
+LinkedHashMap Insertion Order: {X=100, Y=200, Z=300}
+Access Order LRU: {3=Three, 1=One, 4=Four}
+Unique Pets: [cat, dog, bird]
+
+3. TreeMap Examples
+TreeMap Sorted: {Apple=5, Banana=2, Orange=3}
+TreeMap Reversed: {Orange=3, Banana=2, Apple=5}
+SubMap (1 to 10): {1=One, 5=Five}
+*/

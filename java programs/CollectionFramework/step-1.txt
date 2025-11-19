@@ -1,0 +1,27 @@
+Step 1: Collection Hierarchy Overview
+
+               java.util.Collection (root)
+                      /    |     \
+                  List   Set    Queue
+                            \
+                         SortedSet
+                            \
+                       NavigableSet
+
+          java.util.Map (separate root)
+                   |
+               SortedMap
+                   |
+             NavigableMap
+
+=> Collection<E> is the root interface for storing groups of objects.
+=> Map<K, V> is not a subtype of Collection — it stores key-value pairs.
+=> All interfaces are generic, providing type safety: List<String>, Set<Integer>,   etc.
+
+Real-world Analogy:
+ 
+List = Order of items matters (like a playlist or to-do list)
+Set = Unique items (like tags in blog posts)
+Map = Dictionary or phonebook (Key → Value)
+Queue = Print queue or task queue
+

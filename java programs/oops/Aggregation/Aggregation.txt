@@ -1,0 +1,23 @@
+// "Has-a" relationship (but with independence)
+
+// Real-life:
+// A Department has Professors
+
+// If department is gone, professors still exist
+// Key Point: Ownership exists, but lifetime is independent.
+
+
+import java.util.List;
+
+class Professor {
+    String name;
+}
+
+class Department {
+    // Aggregation: Professors belong to a department
+    List<Professor> professors;
+}
+
+
+Aggregation is a "has-a" relationship, where one class contains a reference to another class, but the contained object can exist independently of the container.
+It's a weaker form of composition

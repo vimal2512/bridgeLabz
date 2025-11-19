@@ -1,0 +1,98 @@
+//  1. Program using only try-catch
+
+public class TryCatchExample {
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0; // will throw ArithmeticException
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Caught an exception: " + e.getMessage());
+        }
+    }
+}
+
+
+// 2. Program using try-catch-finally
+
+public class TryCatchFinallyExample {
+    public static void main(String[] args) {
+        try {
+            int result = 5 / 0;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Caught an exception: " + e.getMessage());
+        } finally {
+            System.out.println("This block always runs.");
+        }
+    }
+}
+
+
+// 3. Program using instanceof
+
+class Animal {}
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking...");
+    }
+}
+
+public class InstanceOfExample {
+    public static void main(String[] args) {
+        Animal a = new Dog(); // Upcasting
+
+        if (a instanceof Dog) {
+            Dog d = (Dog) a; // Downcasting
+            d.bark();
+        } else {
+            System.out.println("Not a Dog instance.");
+        }
+    }
+}
+
+
+// 4. Program using try-with-resources
+
+class MyResource implements AutoCloseable {
+    public void sayHello() {
+        System.out.println("Hello from MyResource!");
+    }
+
+    @Override
+    public void close() {
+        System.out.println("MyResource is closed automatically.");
+    }
+}
+
+public class TryWithResourcesExample {
+    public static void main(String[] args) {
+        try (MyResource res = new MyResource()) {
+            res.sayHello();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+}
+
+
+// 5. Program using finalize()
+
+public class FinalizeExample {
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("finalize() method is called before object is garbage collected.");
+    }
+
+    public static void main(String[] args) {
+        FinalizeExample obj = new FinalizeExample();
+        obj = null; // Make object eligible for GC
+        System.gc(); // Suggest JVM to run GC
+        System.out.println("Main method completed.");
+    }
+}
+
+//The finalize() method was designed to allow an object to clean up resources (like closing file streams or database connections) before it is garbage collected.  it is depricated
+
+
+
+

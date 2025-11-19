@@ -1,0 +1,25 @@
+public class Login {
+
+    void login(String username, String password) {
+        System.out.println("Logged in with username and password");
+    }
+
+    void login(String email) {
+        System.out.println("Logged in with email link");
+    }
+
+    void login(long phoneNumber) {
+        System.out.println("Logged in with OTP to phone");
+    }
+
+    public static void main(String[] args) {
+        Login l = new Login();
+        l.login("user123", "pass123");
+        l.login("user@example.com");
+        l.login(9876543210L);
+    }
+}
+
+Logged in with username and password
+Logged in with email link
+Logged in with OTP to phone

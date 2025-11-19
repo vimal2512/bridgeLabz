@@ -1,0 +1,92 @@
+4: LinkedHashSet Basics
+ This program shows how LinkedHashSet maintains insertion order.
+ Notice: Unlike HashSet, LinkedHashSet preserves insertion order.
+
+ import java.util.*;
+
+ public class LinkedHashSetBasics {
+   public static void main(String[] args) {
+
+      // Creating a LinkedHashSet
+      LinkedHashSet<String> cities = new LinkedHashSet<>();
+      
+      // Adding elements
+      cities.add("Chennai");
+      cities.add("Bangalore");
+      cities.add("Hyderabad");
+      cities.add("Delhi");
+      cities.add("Bangalore");  // Duplicate
+
+      // Displaying elements
+      System.out.println("Cities:" + cities);
+
+      //check existence
+      System.out.println("Contains details?" + cities.contains("Delhi"));
+
+      // Remove an element
+      cities.remove("Chennai");
+
+      //Size
+      System.out.println("Size: " + cities.size());
+
+     // Iterating using for each
+     System.out.println("Iterating over cities:");
+     for(String city : cities) {
+       System.out.println(city);
+     }
+   }
+ }
+
+Output:
+Cities: [Chennai, Bangalore, Hyderabad, Delhi]
+Contains Delhi? true
+Size: 3
+Iterating over cities:
+Bangalore
+Hyderabad
+Delhi
+
+note:
+ Hashset - No guaranteed order
+ LinkedHashSet - Maintains insertion order 
+
+5. Remove duplicates while preserving order using LinkedHashSet?
+
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input a line of text
+        System.out.print("Enter a list of words separated by space: ");
+        String input = sc.nextLine();
+
+        String[] words = input.split("\\s+");
+
+        // Use LinkedHashSet to preserve insertion order
+        Set<String> uniqueWords = new LinkedHashSet<>();
+
+        for (String word : words) {
+            uniqueWords.add(word);
+        }
+
+        // Display the result
+        System.out.println("Unique words in order:");
+        for (String word : uniqueWords) {
+            System.out.print(word + " ");
+        }
+
+        sc.close();
+    }
+}
+
+ Output:
+  
+Enter a list of words separated by space: mango apple banana mango orange banana
+
+Unique words in order:
+mango apple banana orange
+

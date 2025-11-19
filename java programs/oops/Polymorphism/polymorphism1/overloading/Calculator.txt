@@ -1,0 +1,23 @@
+class Calculator {
+  void add(int a, int b){
+     System.out.println("Sum of int: " + (a+b));
+  }
+  
+  void add(double a, double b) {
+    System.out.println("Sum of 3 int: " + (a+b+c));
+  }
+
+  void add(int a, int b, int c) {
+    System.out.println("Sum of 3 int: " + (a + b + c));
+  }
+}
+
+
+public class OverloadingDemo {
+    public static void main(String[] args) {
+        Calculator c = new Calculator();
+        c.add(10, 20);
+        c.add(10.5, 5.5);
+        c.add(1, 2, 3);
+    }
+}

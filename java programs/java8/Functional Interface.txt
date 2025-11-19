@@ -1,0 +1,255 @@
+1. Greet User using a Custom Functional Interface
+
+@FunctionalInterface
+interface Greeter {
+    void greet(String name);
+}
+
+public class GreetUser {
+    public static void main(String[] args) {
+        Greeter greeter = name -> System.out.println("Hello, " + name + "!");
+        greeter.greet("Vimal");
+    }
+}
+
+Output:
+Hello, Vimal!
+
+
+2. Convert String to Uppercase and Get Length using Function
+
+import java.util.function.Function;
+
+public class StringTransform {
+    public static void main(String[] args) {
+        Function<String, String> toUpper = String::toUpperCase;
+        Function<String, Integer> getLength = String::length;
+
+        String input = "lambda";
+        System.out.println("Uppercase: " + toUpper.apply(input));
+        System.out.println("Length: " + getLength.apply(input));
+    }
+}
+
+Output:
+
+Uppercase: LAMBDA
+Length: 6
+
+Explanation:
+
+Function<T, R>
+This is a built-in functional interface from java.util.function.
+Represents a function that takes an input of type T and returns a result of type R.
+It contains the method:
+R apply(T t);
+
+Function<String, String> toUpper = String::toUpperCase;
+This is a method reference to toUpperCase() on a String object.
+It takes a String as input and returns the uppercase version.
+
+Function<String, Integer> getLength = String::length;
+Another method reference to length() on a String object.
+Takes a String and returns its length as an Integer.
+
+toUpper.apply(input) and getLength.apply(input)
+These use the Function objects to transform the input "lambda":
+
+"lambda".toUpperCase() ➜ "LAMBDA"
+"lambda".length() ➜ 6
+
+
+3. Check if a User is an Adult using Predicate
+
+import java.util.function.Predicate;
+
+public class AgeValidator {
+    public static void main(String[] args) {
+        Predicate<Integer> isAdult = age -> age >= 18;
+
+        System.out.println("Is 16 adult? " + isAdult.test(16));
+        System.out.println("Is 22 adult? " + isAdult.test(22));
+    }
+}
+
+Output:
+
+Is 16 adult? false
+Is 22 adult? true
+
+
+ 4. Display List of Products using Consumer
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
+public class ProductPrinter {
+    public static void main(String[] args) {
+        List<String> products = Arrays.asList("Laptop", "Phone", "Tablet");
+
+        Consumer<String> printProduct = System.out::println;
+        products.forEach(printProduct);
+    }
+}
+
+Output:
+
+Laptop
+Phone
+Tablet
+
+Note:
+Consumer<T> Functional Interface
+It represents an operation that takes a single input argument and returns no result.
+System.out::println is a method reference to print the input string.
+
+Method: void accept(T t);
+
+
+5. Get Default Setting using Supplier
+
+import java.util.function.Supplier;
+
+public class ConfigSupplier {
+    public static void main(String[] args) {
+        Supplier<String> getDefault = () -> "Dark Mode";
+
+        System.out.println("Theme: " + getDefault.get());
+    }
+}
+
+Output:
+Theme: Dark Mode
+
+What is Supplier<T>?
+  Supplier<T> is a functional interface in java.util.function.
+  It takes no input but returns a result.
+  Method it provides: T get();
+
+  
+
+6. Add Two Numbers using BiFunction
+
+import java.util.function.BiFunction;
+
+public class AddNumbers {
+    public static void main(String[] args) {
+        BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+
+        System.out.println("Sum: " + add.apply(10, 20));
+    }
+}
+
+Output:
+
+Sum: 30
+
+What is BiFunction<T, U, R>?
+
+  BiFunction is a functional interface in java.util.function package.
+  It takes two arguments and returns a result.
+
+Method provided:
+  R apply(T t, U u);
+In simple terms: It’s a function that accepts two inputs and returns one output.
+
+   
+7. Compare Two Emails using BiPredicate
+
+import java.util.function.BiPredicate;
+
+public class EmailComparer {
+    public static void main(String[] args) {
+        BiPredicate<String, String> isSameEmail = 
+            (e1, e2) -> e1.equalsIgnoreCase(e2);
+
+        System.out.println(isSameEmail.test("User@Example.com", "user@example.com"));
+    }
+}
+
+Output:
+true
+
+What is BiPredicate<T, U>?
+   It’s a functional interface in the java.util.function package.
+   It accepts two input parameters and returns a boolean (true/false).
+
+Method it defines:
+    boolean test(T t, U u);
+
+
+8. Sort Products by Price using Comparator
+
+import java.util.*;
+
+class Product {
+    String name;
+    double price;
+
+    Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String toString() {
+        return name + " - ₹" + price;
+    }
+}
+
+public class SortProducts {
+    public static void main(String[] args) {
+        List<Product> list = Arrays.asList(
+            new Product("Monitor", 12000),
+            new Product("Keyboard", 2000),
+            new Product("Mouse", 800)
+        );
+
+        list.sort(Comparator.comparing(p -> p.price));
+        list.forEach(System.out::println);
+    }
+}
+
+Output:
+Mouse - ₹800.0  
+Keyboard - ₹2000.0  
+Monitor - ₹12000.0
+
+
+9. Run Background Task using Runnable
+
+public class BackgroundTask {
+    public static void main(String[] args) {
+        Runnable task = () -> System.out.println("Task running...");
+
+        Thread t = new Thread(task);
+        t.start();
+    }
+}
+
+Output:
+
+Task running...
+
+10. Use Optional.map to Avoid NullPointerException
+
+import java.util.Optional;
+
+public class OptionalExample {
+    public static void main(String[] args) {
+        String name = "john";
+
+        Optional<String> optionalName = Optional.ofNullable(name);
+
+        String result = optionalName.map(String::toUpperCase).orElse("UNKNOWN");
+
+        System.out.println("Result: " + result);
+    }
+}
+
+Output:
+
+Result: JOHN
+
+
+

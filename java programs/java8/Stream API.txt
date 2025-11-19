@@ -1,0 +1,251 @@
+A Stream in Java is a way to process data from collections (like lists or arrays) using a sequence of operations like filtering, mapping, sorting, etc., without using loops.
+
+It helps write clean, readable, and functional-style code.
+
+
+
+1. Filter Employees by Salary > 50000
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Employee {
+    String name;
+    double salary;
+
+    Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+public class FilterEmployees {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Vimal", 45000),
+            new Employee("Ravi", 60000),
+            new Employee("Priya", 52000),
+            new Employee("Anjali", 40000)
+        );
+
+        List<String> highEarners = employees.stream()
+            .filter(emp -> emp.salary > 50000)
+            .map(emp -> emp.name)
+            .collect(Collectors.toList());
+
+        System.out.println("Employees earning more than 50,000: " + highEarners);
+    }
+}
+
+
+ Output:
+
+ Employees earning more than 50,000: [Ravi, Priya]
+
+2: Convert List of to Uppercase?
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class UppercaseNames {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("vimal", "raj", "priya", "ravi");
+
+        List<String> upperNames = names.stream()
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+
+        System.out.println("Uppercase Names: " + upperNames);
+    }
+}
+
+
+Output:
+
+Uppercase Names: [VIMAL, RAJ, PRIYA, RAVI]
+
+
+3: Find Even Numbers from a List?
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class EvenNumbers {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        List<Integer> evenNumbers = numbers.stream()
+            .filter(n -> n % 2 == 0)
+            .collect(Collectors.toList());
+
+        System.out.println("Even Numbers: " + evenNumbers);
+    }
+}
+
+
+Output:
+Even Numbers: [2, 4, 6, 8, 10]
+
+
+4: Find First Element Starting With a Given Letter?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class FirstNameStartsWithA {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("John", "Amanda", "Steve", "Alice", "Bob");
+
+        Optional<String> firstA = names.stream()
+            .filter(name -> name.startsWith("A"))
+            .findFirst();
+
+        firstA.ifPresent(name -> System.out.println("First name starting with A: " + name));
+    }
+}
+
+ Output:
+
+ First name starting with A: Amanda
+
+
+5: Convert All Strings to Uppercase?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class UpperCaseNames {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("john", "amanda", "steve", "alice", "bob");
+
+        List<String> upperNames = names.stream()
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+
+        System.out.println("Uppercase names: " + upperNames);
+    }
+}
+
+
+Output:
+
+Uppercase names: [JOHN, AMANDA, STEVE, ALICE, BOB]
+
+
+6: Check if All Numbers Are Even using allMatch()?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class CheckAllEven {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(2, 4, 6, 8, 10);
+
+        boolean allEven = numbers.stream()
+            .allMatch(n -> n % 2 == 0);
+
+        System.out.println("Are all numbers even? " + allEven);
+    }
+}
+
+
+Output:
+Are all numbers even? true
+
+7: Check if Any Number is Greater Than 50 using anyMatch()?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class CheckAnyGreaterThan50 {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(10, 25, 33, 55, 20);
+
+        boolean anyAbove50 = numbers.stream()
+            .anyMatch(n -> n > 50);
+
+        System.out.println("Is any number greater than 50? " + anyAbove50);
+    }
+}
+
+ Output:
+
+ Is any number greater than 50? true
+
+8: Count elements greater than 30 using filter() and count()?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class CountGreaterThan30 {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(10, 45, 22, 67, 35, 20);
+
+        long count = numbers.stream()
+            .filter(n -> n > 30)
+            .count();
+
+        System.out.println("Count of numbers > 30: " + count);
+    }
+}
+
+Output:
+
+Count of numbers > 30: 3
+
+9: Find the minimum value using .min() with a comparator?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class MinValueFinder {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(40, 12, 87, 25, 63);
+
+        Optional<Integer> min = numbers.stream()
+            .min(Integer::compareTo);
+
+        min.ifPresent(value -> System.out.println("Minimum value: " + value));
+    }
+}
+
+
+Output:
+Minimum value: 12
+
+
+note:
+
+.min(Integer::compareTo)
+Finds the minimum value in the stream.
+Integer::compareTo is a method reference to compare integers in natural order (ascending).
+The min() method returns an Optional<Integer> because the list might be empty.
+
+
+min.ifPresent(value -> System.out.println("Minimum value: " + value));
+
+Since min is an Optional, we use .ifPresent() to safely print the result only if it's present.
+If the list was empty, this line would avoid a crash and skip printing.
+
+Why Optional is used?
+  To avoid NullPointerException. If the list is empty, min() returns Optional.empty(), not null. This helps write safer code.
+
+Program 10: Find the maximum value using .max()?
+
+import java.util.*;
+import java.util.stream.*;
+
+public class MaxValueFinder {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(40, 12, 87, 25, 63);
+
+        Optional<Integer> max = numbers.stream()
+            .max(Integer::compareTo);
+
+        max.ifPresent(value -> System.out.println("Maximum value: " + value));
+    }
+}
+
+ Output:
+ Maximum value: 87
+
